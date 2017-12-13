@@ -43,10 +43,14 @@ Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http
 
 ### 3. 绑定设备
   登陆 http://io.m5cloud.com 注册账号,添加设备：
-    ![image](docs/img/add.jpg)
-    将M5Stack Core屏幕显示的Check Code填入绑定设备
-    ![image](docs/img/img_conncet-suc.JPG)
-    ![image](docs/img/checkcode.jpg)
+
+  ![image](docs/img/add.jpg)
+
+  将M5Stack Core屏幕显示的Check Code填入绑定设备
+  
+  ![image](docs/img/img_conncet-suc.JPG)
+  
+  ![image](docs/img/checkcode.jpg)
 
 
 
