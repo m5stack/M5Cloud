@@ -5,8 +5,7 @@
 ### 1. 烧录固件
 #### Windows烧录
 Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http://espressif.com/sites/default/files/tools/flash_download_tools_v3.6.2.2_0.rar))，设置如下(先擦除再烧录)：
-
-![image](docs/img/windows_esptool.png)
+  ![image](docs/img/windows_esptool.png)
 
 
 #### MacOS/Linux烧录
@@ -43,7 +42,7 @@ Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http
   TODO
 
 ### 3. 绑定设备
-    登陆 http://io.m5cloud.com 注册账号,添加设备：
+  登陆 http://io.m5cloud.com 注册账号,添加设备：
     ![image](docs/img/add.jpg)
     将M5Stack Core屏幕显示的Check Code填入绑定设备
     ![image](docs/img/img_conncet-suc.JPG)
