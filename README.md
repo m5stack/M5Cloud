@@ -23,11 +23,9 @@ Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http
   - 手机或电脑连接M5Stack Core屏幕提示的WiFi热点
   ![image](docs/img/img_startup_ap.JPG)
 
+    连接M5Stack Core WiFi：
 
-  连接M5Stack Core WiFi：
-
-
-  ![image](docs/img/wificonnect.png)
+    ![image](docs/img/wificonnect.png)
   - 打开浏览器登陆 192.168.4.1填入WiFi的SSID和密码
 - **方法2:** 通过串口配置WiFi密码
 
