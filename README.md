@@ -26,6 +26,8 @@ Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http
 
     ![image](docs/img/wificonnect.png)
   - 打开浏览器登陆 192.168.4.1填入WiFi的SSID和密码
+  ![image](docs/img/wifisetup.jpg)
+  
 - **方法2:** 通过串口配置WiFi密码
 
     通过串口REPL或者上传工具在设备根目录下创建一个名字为：config.json的文件，文件内wifi的配置参数JSON格式如下：
