@@ -116,7 +116,7 @@ lcd.print('hello world', color=0X00FF00)
 
 ### lcd.print(text, [x, y, color])
 
-显示字符串 *text* 在 *(x, y)* 指定的位置，参数 *color* 为颜色参数。
+显示字符串 *text* 在 *(x, y)* 指定的位置，参数 *color* 为颜色参数。 
 
 （注：在中括号如[x, y, color]内的表示为可选参数）
 
