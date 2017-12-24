@@ -92,7 +92,7 @@ lcd.print('hello world!')
 
 #### 颜色
 
-LCD的 **Color** 颜色使用**24bit**整数类型表示,RGB对应各8bit。
+LCD的 **Color** 颜色使用**24bit**整数类型表示,RGB对应各8bit。
 
 比如: **0xFF0000** 相遇于完全红色，**0x00FF00** 相遇于原谅色绿色。
 
