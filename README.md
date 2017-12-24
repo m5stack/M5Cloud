@@ -94,13 +94,13 @@ lcd.print('hello world!')
 
 LCD的 **Color** 颜色使用**24bit**整数类型表示,RGB对应各8bit。
 
-比如: **0xFF0000** 相遇于完全红色，**0x00FF00** 相遇于原谅色绿色。
+比如: **0xFF0000** 相当于于完全红色，**0x00FF00** 相当于原谅色绿色。
 
 常用的颜色可以直接用定义到的参数: 
 
 **BLACK, NAVY, DARKGREEN, DARKCYAN, MAROON, PURPLE, OLIVE, LIGHTGREY, DARKGREY, BLUE, GREEN, CYAN, RED, MAGENTA, YELLOW, WHITE, ORANGE, GREENYELLOW, PINK**
 
-比如想在LCD打印一句绿色的hello world可以这样：
+比如想在LCD打印一句绿色的hello world可以这样：
 ```python
 lcd.print('hello world', color=lcd.GREEN)
 ```
@@ -111,12 +111,12 @@ lcd.print('hello world', color=0X00FF00)
 ```
 
 ### lcd.setColor(color [,bcolor])
-设置默认的绘画颜色和背景色，bcolor一般用于设置文字显示的背景色。
+设置默认的绘画颜色和背景色，bcolor一般用于设置文字显示的背景色。
 
 
 ### lcd.print(text, [x, y, color])
 
-显示字符串 *text* 在 *(x, y)* 指定的位置，参数 *color* 为颜色参数。 
+显示字符串 *text* 在 *(x, y)* 指定的位置，参数 *color* 为颜色参数。 
 
 （注：在中括号如[x, y, color]内的表示为可选参数）
 
@@ -191,20 +191,20 @@ lcd.println('hello world')
 
 ### lcd.pixel(x, y [,color])
 
-画一个像素点在指定位置 (x,y). 如果 *color* 参数未设置, 则默认使用 *lcd.setColor* 设置的前景色.
+画一个像素点在指定位置 (x,y). 如果 *color* 参数未设置, 则默认使用 *lcd.setColor* 设置的前景色.
 
 ### lcd.line(x, y, x1, y1 [,color])
 
-画一条直线从坐标(x,y) 到 (x1,y1). 画一个像素点在指定位置 (x,y). 如果 *color* 参数未设置, 则默认使用 *lcd.setColor* 设置的前景色.
+画一条直线从坐标(x,y) 到 (x1,y1). 画一个像素点在指定位置 (x,y). 如果 *color* 参数未设置, 则默认使用 *lcd.setColor* 设置的前景色.
 
 
 ### lcd.rect(x, y, width, height, [color, fillcolor])
 
-画一个矩形，(x,y)为矩形左上角的起始坐标，参数 *width* 和 *height* 为设置矩形的宽度和高度。
+画一个矩形，(x,y)为矩形左上角的起始坐标，参数 *width* 和 *height* 为设置矩形的宽度和高度。
 
-如果 *color* 和 参数未设置, 则默认使用 *lcd.setColor* 设置的前景色.
+如果 *color* 和 参数未设置, 则默认使用 *lcd.setColor* 设置的前景色.
 
-可选参数 *fillcolor* 为矩形的填充色。
+可选参数 *fillcolor* 为矩形的填充色。
 
 ```python
 lcd.rect(10, 100, 100, 200, 0xFF0000) #不填充颜色
@@ -213,19 +213,19 @@ lcd.rect(10, 100, 100, 200, 0xFF0000, 0x00FF00) #填充矩形内部为绿色
 
 ### lcd.triangle(x, y, x1, y1, x2, y2 [,color, fillcolor])
 
-画一个三角形根据指定的三个点 (x,y), (x1,y1) and (x2,y2).
+画一个三角形根据指定的三个点 (x,y), (x1,y1) and (x2,y2).
 
 
 ### lcd.circle(x, y, r [,color, fillcolor])
 
-画一个圆， 参数(x,y)为圆的原点，*r* 为半径.
+画一个圆，参数(x,y)为圆的原点，*r* 为半径.
 
 
 ### lcd.ellipse(x, y, rx, ry [opt, color, fillcolor])
 
-画一个椭圆 (x,y)和 (rx, ry) 为椭圆的两个焦点.
+画一个椭圆 (x,y)和 (rx, ry) 为椭圆的两个焦点.
 
-**opt* 参数用于显示象限, 默认是 15, 显示整个椭圆.
+**opt* 参数用于显示象限, 默认是 15, 显示整个椭圆.
 
 Multiple segments can drawn, combine (logical or) the values.
 * 1 - upper left segment
@@ -243,14 +243,14 @@ If *fillcolor* is given, filled elipse will be drawn.
 
 ### lcd.poly(x, y, r, sides, thick, [color, fillcolor, rotate])
 
-画一个多边形中心点 (x,y)， *r* 为半径, 参数 *sides* 为多边形的边数，*thick* 为边的厚度。
+画一个多边形中心点 (x,y)， *r* 为半径, 参数 *sides* 为多边形的边数，*thick* 为边的厚度。
 
 如果设置了 *rotate* 参数, 可以旋转多边形的角度 (0~359)
 
 
 ### lcd.roundrect(x, y, width, height, r [color, fillcolor])
 
-圆角矩形参数 *r* 为圆角的半径.
+圆角矩形参数 *r* 为圆角的半径.
 
 
 ### lcd.clear([color]) 
@@ -259,7 +259,7 @@ If *fillcolor* is given, filled elipse will be drawn.
 
 Clear the screen with default background color or specific color if given.
 
-清除屏幕显示的内容，填充指定的颜色，默认是 *lcd.setColor* 设置的背景色。
+清除屏幕显示的内容，填充指定的颜色，默认是 *lcd.setColor* 设置的背景色。
 
 
 ### lcd.image(x, y, file [,scale, type])
