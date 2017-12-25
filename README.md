@@ -96,7 +96,7 @@ LCD的 **Color** 颜色使用**24bit**整数类型表示,RGB对应各8bit。
 
 比如: **0xFF0000** 相当于于完全红色，**0x00FF00** 相当于原谅色绿色。
 
-常用的颜色可以直接用定义到的参数: 
+常用的颜色可以直接用定义到的参数: 
 
 **BLACK, NAVY, DARKGREEN, DARKCYAN, MAROON, PURPLE, OLIVE, LIGHTGREY, DARKGREY, BLUE, GREEN, CYAN, RED, MAGENTA, YELLOW, WHITE, ORANGE, GREENYELLOW, PINK**
 
@@ -118,19 +118,19 @@ lcd.print('hello world', color=0X00FF00)
 
 显示字符串 *text* 在 *(x, y)* 指定的位置，参数 *color* 为颜色参数。 
 
-（注：在中括号如[x, y, color]内的表示为可选参数）
+（注：在中括号如[x, y, color]内的表示为可选参数）
 
-* **x**: 指定水平方向的位置显示, 有以下特殊参数:
+* **x**: 指定水平方向的位置显示, 有以下特殊参数:
   * LASTX(默认), 直接上一个光标的文字接着显示
   * CENTER, 居中显示文本
   * RIGHT, 右对齐文本
 
-* **y**: 指定垂直方向的位置显示, 有以下特殊参数:
+* **y**: 指定垂直方向的位置显示, 有以下特殊参数:
   * LASTX(默认), 直接上一个光标的文字接着显示
   * CENTER, 居中显示文本
-  * BOTTOM, 文字靠底部显示
+  * BOTTOM, 文字靠底部显示
 
-* **color**:如果该参数未设置，默认为 *lcd.setColor* 设置的颜色。
+* **color**:如果该参数未设置，默认为 *lcd.setColor* 设置的颜色。
 
 
 
@@ -153,7 +153,7 @@ lcd.println('hello world') #显示效果一致
 **FONT_Default, FONT_DefaultSmall, FONT_DejaVu18, FONT_Dejavu24, FONT_Ubuntu, FONT_Comic, FONT_Minya, FONT_Tooney, FONT_Small, FONT_7seg**
 
 ```python
-lcd.font(lcd.FONT_Dejavu24) #设置为FONT_Dejavu24字体
+lcd.font(lcd.FONT_Dejavu24) #设置为FONT_Dejavu24字体
 ```
 
 ### lcd.textWidth(text)
@@ -174,13 +174,13 @@ from m5stack import lcd
  #在屏幕上hello world
 lcd.print('hello world')
 
-#在屏幕x=10,y=100的地方显示hello world
+#在屏幕x=10,y=100的地方显示hello world
 lcd.print('hello world', 10, 100)
 
 #显示的文字颜色为绿色的hello world
-lcd.print('hello wrold', color=0xFF0000) 
+lcd.print('hello wrold', color=0xFF0000)
 
-#在屏幕x=10,y=100的地方显示红色的hello world字体
+#在屏幕x=10,y=100的地方显示红色的hello world字体
 lcd.print('hello world', 10, 200, 0xFF0000) 
 
 #设置字体为FONT_Dejavu24
@@ -207,8 +207,8 @@ lcd.println('hello world')
 可选参数 *fillcolor* 为矩形的填充色。
 
 ```python
-lcd.rect(10, 100, 100, 200, 0xFF0000) #不填充颜色
-lcd.rect(10, 100, 100, 200, 0xFF0000, 0x00FF00) #填充矩形内部为绿色
+lcd.rect(10, 100, 100, 200, 0xFF0000) #不填充颜色
+lcd.rect(10, 100, 100, 200, 0xFF0000, 0x00FF00) #填充矩形内部为绿色
 ```
 
 ### lcd.triangle(x, y, x1, y1, x2, y2 [,color, fillcolor])
@@ -259,7 +259,7 @@ If *fillcolor* is given, filled elipse will be drawn.
 
 Clear the screen with default background color or specific color if given.
 
-清除屏幕显示的内容，填充指定的颜色，默认是 *lcd.setColor* 设置的背景色。
+清除屏幕显示的内容，填充指定的颜色，默认是 *lcd.setColor* 设置的背景色。
 
 
 ### lcd.image(x, y, file [,scale, type])
