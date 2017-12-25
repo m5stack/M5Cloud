@@ -163,7 +163,7 @@ lcd.font(lcd.FONT_Dejavu24) #设置为FONT_Dejavu24字体
 
 ### lcd.fontSize()
 
-返回当前字体的 *width* 和 *heigh*。
+返回当前字体的 *width* 和 *heigh*。
 
 
 Example:
