@@ -3,19 +3,21 @@
 ## 快速开始
 
 ### 1. 烧录固件
-#### Windows烧录
-Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http://espressif.com/sites/default/files/tools/flash_download_tools_v3.6.2.2_0.rar))，设置如下(先擦除再烧录)：
-  ![image](docs/img/windows_esptool.png) 
-
 
 #### MacOS/Linux烧录
 - 使用pip安装esptool：
 
     ```pip install esptool```
-
+- 先擦除:
+    ``` esptool.py --chip esp32 --port /dev/tty.SLAB_USBtoUART erase_flash ```
 - 烧录bin文件:
-
     ``` esptool.py --chip esp32 --port /dev/tty.SLAB_USBtoUART write_flash -z 0x1000 firmware.bin ```
+
+
+#### Windows烧录
+Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http://espressif.com/sites/default/files/tools/flash_download_tools_v3.6.2.2_0.rar))，设置如下(先擦除再烧录)：
+  ![image](docs/img/windows_esptool.png) 
+
 
 ### 2. 让设备WiFi接入网络
 - **方法1:** 使用热点接入，通过Web配置网络
