@@ -1,5 +1,7 @@
 # M5Stack Web IDE
 
+[EN](#alios-things) | [中文](#alios-things概述)
+
 ## 快速开始
 
 ### 1. 烧录固件
