@@ -46,7 +46,7 @@ Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http
   TODO
 
 ### 3. 绑定设备
-  登陆 http://io.m5cloud.com 注册账号,添加设备：
+  登陆 http://io.m5stack.com 注册账号,添加设备：
 
   ![image](docs/img/add.jpg)
 
