@@ -1,56 +1,46 @@
 # M5Stack Web IDE
 
-## 快速开始
+[EN](README.md) | [中文](README_CN.md)
 
-### 1. 烧录固件
+## Getting Started
 
-#### MacOS/Linux烧录
-- 使用pip安装esptool：
+### 1. Burn firmware
+
+#### Download firmware
+[https://github.com/m5stack/M5Cloud/tree/master/firmwares](https://github.com/m5stack/M5Cloud/tree/master/firmwares)
+
+#### MacOS/Linux
+- Installing esptool：
 
     ```pip install esptool```
-- 先擦除:
+- Erase flash:
     ``` esptool.py --chip esp32 --port /dev/tty.SLAB_USBtoUART erase_flash ```
-- 烧录bin文件:
+- Flash:
     ``` esptool.py --chip esp32 --port /dev/tty.SLAB_USBtoUART write_flash -z 0x1000 firmware.bin ```
 
 
-#### Windows烧录
-Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http://espressif.com/sites/default/files/tools/flash_download_tools_v3.6.2.2_0.rar))，设置如下(先擦除再烧录)：
+#### Windows
+Windows can use Espressif Flash Download Tools([Download](http://espressif.com/sites/default/files/tools/flash_download_tools_v3.6.2.2_0.rar)) (Erase first)：
   ![image](docs/img/windows_esptool.png) 
 
 
-### 2. 让设备WiFi接入网络
-- **方法1:** 使用热点接入，通过Web配置网络
-  - 手机或电脑连接M5Stack Core屏幕提示的WiFi热点
+### 2. Configure the WiFi
+  - Connecting M5Stack AP:
   ![image](docs/img/img_startup_ap.JPG)
 
-    连接M5Stack Core WiFi：
+    Connect the WiFi：
 
     ![image](docs/img/wificonnect.png)
-  - 打开浏览器登陆 192.168.4.1填入WiFi的SSID和密码
+  - Use Mobile Phone or PC browser login 192.168.4.1 setting the SSID and Password.
   ![image](docs/img/wifisetup.jpg)
   
-- **方法2:** 通过串口配置WiFi密码
 
-    通过串口REPL或者上传工具在设备根目录下创建一个名字为：config.json的文件，文件内wifi的配置参数JSON格式如下：
-    ```
-    {
-        "wifi":{
-            "ssid":"MasterHax_2.4G",
-            "password":"12345678"
-        }
-    }
-    ```
-- **方法3:** 通过微信扫描二维码Airkiss接入
-
-  TODO
-
-### 3. 绑定设备
-  登陆 http://io.m5stack.com 注册账号,添加设备：
+### 3. Binding device
+  Login: http://io.m5stack.com register account and add the device：
 
   ![image](docs/img/add.jpg) 
 
-  将M5Stack Core屏幕显示的Check Code填入绑定设备，Check Code是一次性随机的，60秒会刷新一次，仅仅用于设备绑定验证。
+  Input the Check Code for the M5Stack screen display，Check Code is random,after 60s will refresh.
 
   ![image](docs/img/img_conncet-suc.JPG)
   
@@ -58,176 +48,98 @@ Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http
 
 
 
-### 4. 开始编程
+### 4. Coding
 ![image](docs/img/ide_uploads.jpg)
 
 # **M5Stack** Micropython
 
-Micropython 快速入门
+Micropython Getting Started
 
 ## **LCD**
 
 ---
 
-在使用LCD前，先导入LCD对象:
+Import M5Stack:
 
 ```python
-from m5stack import lcd
+from m5stack import *
 lcd.print('hello world!')
 ```
 
-也可以直接这样：
+#### Colors
 
-```python
-import m5stack
-m5stack.lcd.print('hello world!')
-```
+**Color** value are given as 24 bit integer numbers, 8-bit per color.
 
-或者这样：
+For example: **0xFF0000** represents the RED color. Only upper 6 bits of the color component value is used.
 
-```python
-import m5stack
-lcd = m5stack.lcd
-lcd.print('hello world!')
-```
-
-
-#### 颜色
-
-LCD的 **Color** 颜色使用**24bit**整数类型表示,RGB对应各8bit。
-
-比如: **0xFF0000** 相当于于完全红色，**0x00FF00** 相当于原谅色绿色。
-
-常用的颜色可以直接用定义到的参数: 
+The following color constants are defined and can be used as color arguments: 
 
 **BLACK, NAVY, DARKGREEN, DARKCYAN, MAROON, PURPLE, OLIVE, LIGHTGREY, DARKGREY, BLUE, GREEN, CYAN, RED, MAGENTA, YELLOW, WHITE, ORANGE, GREENYELLOW, PINK**
 
-比如想在LCD打印一句绿色的hello world可以这样：
-```python
-lcd.print('hello world', color=lcd.GREEN)
-```
+#### Drawing
 
-也可以这样：
-```python
-lcd.print('hello world', color=0X00FF00)
-```
+All **drawings** coordinates are **relative** to the **display window**.
 
-### lcd.setColor(color [,bcolor])
-设置默认的绘画颜色和背景色，bcolor一般用于设置文字显示的背景色。
+Initialy, the display window is set to full screen, and there are methods to set the window to the part of the full screen.
 
+#### Fonts
 
-### lcd.print(text, [x, y, color])
+9 bit-mapped fornts and one vector 7-segment font are included.
+Unlimited number of fonts from file can also be used.
 
-显示字符串 *text* 在 *(x, y)* 指定的位置，参数 *color* 为颜色参数。 
-
-（注：在中括号如[x, y, color]内的表示为可选参数）
-
-* **x**: 指定水平方向的位置显示, 有以下特殊参数:
-  * LASTX(默认), 直接上一个光标的文字接着显示
-  * CENTER, 居中显示文本
-  * RIGHT, 右对齐文本
-
-* **y**: 指定垂直方向的位置显示, 有以下特殊参数:
-  * LASTX(默认), 直接上一个光标的文字接着显示
-  * CENTER, 居中显示文本
-  * BOTTOM, 文字靠底部显示
-
-* **color**:如果该参数未设置，默认为 *lcd.setColor* 设置的颜色。
-
-
-
-### lcd.println(text, [x, y, color])
-
-lcd.println函数功能与 *lcd.print* 函数功能基本一样，只是会在最后自动换行。
-
-```python
-lcd.print('hello world\n')
-lcd.println('hello world') #显示效果一致
-```
-
-
-### lcd.font(font)
-
-设置字体.
-
-可以使用内置的字体已定义好的参数: 
+The following font constants are defined and can be used as font arguments: 
 
 **FONT_Default, FONT_DefaultSmall, FONT_DejaVu18, FONT_Dejavu24, FONT_Ubuntu, FONT_Comic, FONT_Minya, FONT_Tooney, FONT_Small, FONT_7seg**
 
-```python
-lcd.font(lcd.FONT_Dejavu24) #设置为FONT_Dejavu24字体
-```
 
-### lcd.textWidth(text)
+---
 
-返回字符串 *text* 字体显示占用的宽度。
+## Methods
 
 
-### lcd.fontSize()
+### tft.pixel(x, y [,color])
 
-返回当前字体的 *width* 和 *heigh*。
-
-
-Example:
-
-```python
-from m5stack import lcd
-
- #在屏幕上hello world
-lcd.print('hello world')
-
-#在屏幕x=10,y=100的地方显示hello world
-lcd.print('hello world', 10, 100)
-
-#显示的文字颜色为绿色的hello world
-lcd.print('hello wrold', color=0xFF0000)
-
-#在屏幕x=10,y=100的地方显示红色的hello world字体
-lcd.print('hello world', 10, 200, 0xFF0000) 
-
-#设置字体为FONT_Dejavu24
-lcd.font(lcd.FONT_Dejavu24)
-lcd.println('hello world')
-```
+Draw the pixel at position (x,y).<br>
+If *color* is not given, current foreground color is used.
 
 
-### lcd.pixel(x, y [,color])
+### tft.readPixel(x, y)
 
-画一个像素点在指定位置 (x,y). 如果 *color* 参数未设置, 则默认使用 *lcd.setColor* 设置的前景色.
-
-### lcd.line(x, y, x1, y1 [,color])
-
-画一条直线从坐标(x,y) 到 (x1,y1). 画一个像素点在指定位置 (x,y). 如果 *color* 参数未设置, 则默认使用 *lcd.setColor* 设置的前景色.
+Get the pixel color value at position (x,y).
 
 
-### lcd.rect(x, y, width, height, [color, fillcolor])
+### tft.line(x, y, x1, y1 [,color])
 
-画一个矩形，(x,y)为矩形左上角的起始坐标，参数 *width* 和 *height* 为设置矩形的宽度和高度。
-
-如果 *color* 和 参数未设置, 则默认使用 *lcd.setColor* 设置的前景色.
-
-可选参数 *fillcolor* 为矩形的填充色。
-
-```python
-lcd.rect(10, 100, 100, 200, 0xFF0000) #不填充颜色
-lcd.rect(10, 100, 100, 200, 0xFF0000, 0x00FF00) #填充矩形内部为绿色
-```
-
-### lcd.triangle(x, y, x1, y1, x2, y2 [,color, fillcolor])
-
-画一个三角形根据指定的三个点 (x,y), (x1,y1) and (x2,y2).
+Draw the line from point (x,y) to point (x1,y1)<br>
+If *color* is not given, current foreground color is used.
 
 
-### lcd.circle(x, y, r [,color, fillcolor])
+### tft.lineByAngle(x, y, start, length, angle [,color])
 
-画一个圆，参数(x,y)为圆的原点，*r* 为半径.
+Draw the line from point (x,y) with length *lenght* starting st distance *start* from center.<br>
+If *color* is not given, current foreground color is used.<br>
+The angle is given in degrees (0~359).
 
 
-### lcd.ellipse(x, y, rx, ry [opt, color, fillcolor])
+### tft.triangle(x, y, x1, y1, x2, y2 [,color, fillcolor])
 
-画一个椭圆 (x,y)和 (rx, ry) 为椭圆的两个焦点.
+Draw the triangel between points (x,y), (x1,y1) and (x2,y2).<br>
+If *color* is not given, current foreground color is used.<br>
+If *fillcolor* is given, filled triangle will be drawn.
 
-**opt* 参数用于显示象限, 默认是 15, 显示整个椭圆.
+
+### tft.circle(x, y, r [,color, fillcolor])
+
+Draw the circle with center at (x,y) and radius r.<br>
+If *color* is not given, current foreground color is used.<br>
+If *fillcolor* is given, filled circle will be drawn.
+
+
+### tft.ellipse(x, y, rx, ry [opt, color, fillcolor])
+
+Draw the circle with center at (x,y) and radius r.<br>
+If *color* is not given, current foreground color is used.<br>
+**opt* argument defines the ellipse segment to be drawn, default id 15, all ellipse segments.
 
 Multiple segments can drawn, combine (logical or) the values.
 * 1 - upper left segment
@@ -238,68 +150,198 @@ Multiple segments can drawn, combine (logical or) the values.
 If *fillcolor* is given, filled elipse will be drawn.
 
 
-### lcd.arc(x, y, r, thick, start, end [color, fillcolor])
+### tft.arc(x, y, r, thick, start, end [color, fillcolor])
 
-画一个圆弧中心点 (x,y)， *r* 为半径，*thick* 为边的厚度，起始角度 *start* 和 *end* 角度（0~360度）。
-
-
-### lcd.polygon(x, y, r, sides, thick, [color, fillcolor, rotate])
-
-画一个多边形中心点 (x,y)， *r* 为半径, 参数 *sides* 为多边形的边数，*thick* 为边的厚度。
-
-如果设置了 *rotate* 参数, 可以旋转多边形的角度 (0~359)
+Draw the arc with center at (x,y) and radius *r*, starting at angle *start* and ending at angle *end*<br>
+The thicknes of the arc outline is set by the *thick* argument<br>
+If *fillcolor* is given, filled arc will be drawn.
 
 
-### lcd.roundrect(x, y, width, height, r [color, fillcolor])
+### tft.poly(x, y, r, sides, thick, [color, fillcolor, rotate])
 
-圆角矩形参数 *r* 为圆角的半径.
+Draw the polygon with center at (x,y) and radius *r*, with number of sides *sides*<br>
+The thicknes of the polygon outline is set by the *thick* argument<br>
+If *fillcolor* is given, filled polygon will be drawn.<br>
+If *rotate* is given, the polygon is rotated by the given angle (0~359)
 
 
-### lcd.clear([color]) 
+### tft.rect(x, y, width, height, [color, fillcolor])
 
-等价于lcd.fill([color])
+Draw the rectangle from the upper left point at (x,y) and width *width* and height *height*<br>
+If *fillcolor* is given, filled rectangle will be drawn.
+
+
+### tft.roundrect(x, y, width, height, r [color, fillcolor])
+
+Draw the rectangle with rounded corners from the upper left point at **(x,y)** and width **width** and height **height**<br>
+Corner radius is given by **r** argument.<br>
+If **fillcolor** is given, filled rectangle will be drawn.
+
+
+### tft.clear([color])
 
 Clear the screen with default background color or specific color if given.
 
-清除屏幕显示的内容，填充指定的颜色，默认是 *lcd.setColor* 设置的背景色。
+
+### tft.clearWin([color])
+
+Clear the current display window with default background color or specific color if given.
 
 
-### lcd.image(x, y, file [,scale, type])
+### tft.orient(orient)
 
-显示图片*file*，(x,y)为起始位置 
-* 支持 **JPG** and **BMP** 图片格式.
-* Constants **lcd.CENTER**, **lcd.BOTTOM**, **lcd.RIGHT** can be used for x&y
+Set the display orientation.<br>
+Use one of predifined constants:<br>**tft.PORTRAIT**, **tft.LANDSCAPE**, **tft.PORTRAIT_FLIP**, **tft.LANDSCAPE_FLIP**
+
+
+### tft.font(font [,rotate, transparent, fixedwidth, dist, width, outline, color])
+
+Set the active font and its characteristics.
+
+| Argument | Description |
+| - | - |
+| font | required, use font name constant or font file name |
+| rotate | optional, set font rotation angle (0~360) |
+| transparent | only draw font's foreground pixels |
+| fixedwidth | draw proportional font with fixed character width, max character width from the font is used |
+| dist | only for 7-seg font, the distance between bars |
+| width | only for 7-seg font, the width of the bar |
+| outline | only for 7-seg font, draw the outline |
+| color | font color, if not given the current foreground color is used |
+
+
+### tft.attrib7seg(dist, width, outline, color)
+
+Set characteristics of the 7-segment font
+
+| Argument | Description |
+| - | - |
+| dist | the distance between bars |
+| width | the width of the bar |
+| outline | outline color |
+| color | fill color |
+
+
+### tft.fontSize()
+
+Return width and height of the active font
+
+
+### tft.text(x, y, text [, color])
+
+Display the string *text* at possition (x,y).<br>
+If *color* is not given, current foreground color is used.
+
+* **x**: horizontal position of the upper left point in pixels, special values can be given:
+  * CENTER, centers the text
+  * RIGHT, right justifies the text
+  * LASTX, continues from last X position; offset can be used: LASTX+n
+* **y**: vertical position of the upper left point in pixels, special values can be given:
+  * CENTER, centers the text
+  * BOTTOM, bottom justifies the text
+  * LASTY, continues from last Y position; offset can be used: LASTY+n
+* **text**: string to be displayed. Two special characters are allowed in strings:
+  * â€˜\râ€™ CR (0x0D), clears the display to EOL
+  * â€˜\nâ€™ LF (ox0A), continues to the new line, x=0
+
+ 
+### tft.textWidth(text)
+
+Return the width of the string *text* using the active font fontSize
+
+
+### tft.textClear(x, y, text [, color])
+
+Clear the the screen area used by string *text* at possition (x,y) using the bacckground color *color*.<br>
+If *color* is not given, current background color is used.
+
+
+### tft.image(x, y, file [,scale, type])
+
+Display the image from the file *file* on position (x,y)
+* **JPG** and **BMP** can be displayed.
+* Constants **tft.CENTER**, **tft.BOTTOM**, **tft.RIGHT** can be used for x&y
 * **x** and **y** values can be negative
 
-**scale**: 图片缩放比例
+**scale** (jpg): image scale factor: 0 to 3; if scale>0, image is scaled by factor 1/(2^scale) (1/2, 1/4 or 1/8)<br>
+**scale** (bmp): image scale factor: 0 to 7; if scale>0, image is scaled by factor 1/(scale+1)<br>
+**type**: optional, set the image type, constants *tft.JPG* or *tft.BMP* can be used. If not set, file extension and/or file content will be used to determine the image type.
 
-**type**: 图片的类型 *lcd.JPG* 或 *lcd.BMP* 
+
+### tft.setwin(x, y, x1, y1)
+
+Set active display window to screen rectangle (x,y) - (x1,y1)
+
+
+### tft.resetwin()
+
+Reset active display window to full screen size.
+
+
+### tft.savewin()
+
+Save active display window dimensions.
+
+
+### tft.restorewin()
+
+Restore active display window dimensions previously saved wint savewin().
+
+
+### tft.screensize()
+
+Return the display size, (width, height)
+
+
+### tft.winsize()
+
+Return the active display window size, (width, height)
+
+
+### tft.hsb2rgb(hue, saturation, brightness)
+
+Converts the components of a color, as specified by the HSB model, to an equivalent set of values for the default RGB model.<br>
+Returns 24-bit integer value suitable to be used as color argiment
+
+Arguments
+* **hue**: float: any number, the floor of this number is subtracted from it to create a fraction between 0 and 1. This fractional number is then multiplied by 360 to produce the hue angle in the HSB color model.
+* **saturation**: float; 0 ~ 1.0
+* **brightness**: float; 0 ~ 1.0
+
+
+### tft.compileFont(file_name [,debug])
+
+Compile the source font file (must have **.c** extension) to the binary font file (same name, **.fon** extension) which can be used as external font.<br>
+If *debug=True* the information about compiled font will be printed.
+
+You can create the **c** source file from any **tft** font using the included [ttf2c_vc2003.exe](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/tree/master/MicroPython_BUILD/components/micropython/esp32/modules_examples/tft/font_tool/) program.
+See [README](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/tree/master/MicroPython_BUILD/components/micropython/esp32/modules_examples/tft/font_tool/README.md) for instructions.
 
 ## **Button**
 
 ---
 ```python
-import m5stack as m5
-
-def press_cb(pin):
-    m5.lcd.println('button_press A')
-    print('button_press A')
-    
-m5.BtnA.set_callback(press_cb)
-```
-
-或者：
-
-```python
-import m5stack as m5
+from m5stack import *
 
 while True:    
-  if m5.BtnA.press():
-    m5.lcd.println('button_press A')
+  if BtnA.press():
+    lcd.println('button_press A')
   time.sleep_ms(10)
 
 ```
 
+Callback：
+
+
+```python
+from m5stack import *
+
+def press_cb(pin):
+    lcd.println('button_press A')
+    print('button_press A')
+    
+BtnA.set_callback(press_cb)
+```
 
 ## **SD Card**
 
@@ -318,10 +360,10 @@ uos.listdir('/sd')
 ---
 
 ```python
-import m5stack as m5
+from m5stack import *
 
-m5.beep.tone(freq=1800)
-m5.beep.tone(freq=1800, timeout=200)
+beep.tone(freq=1800)
+beep.tone(freq=1800, timeout=200)
 ```
 
 ## **GPIO**
@@ -382,11 +424,23 @@ i2c.readfrom_mem(42, 8, 3)      # read 3 bytes from memory of slave 42,
 i2c.writeto_mem(42, 2, b'\x10') # write 1 byte to memory of slave 42
                                 #   starting at address 2 in the slave
 ```
-## **SPI**
 
----
 
 
 ## **UART**
 
 ---
+```python
+from machine import UART
+
+uart2 = UART(2, tx=17, rx=16)
+uart2.init(115200, bits=8, parity=None, stop=1)
+uart2.read(10)       # read 10 characters, returns a bytes object
+uart2.read()         # read all available characters
+uart2.readline()     # read a line
+uart2.readinto(buf)  # read and store into the given buffer
+uart2.write('abc')   # write the 3 characters
+```
+
+M5stack firwmre is bose on *MicroPython_ESP32_psRAM_LoBo* More docs:
+https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki
