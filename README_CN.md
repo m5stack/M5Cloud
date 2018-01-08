@@ -5,6 +5,9 @@
 
 ### 1. 烧录固件
 
+#### 下载最新固件
+[https://github.com/m5stack/M5Cloud/tree/master/firmwares](https://github.com/m5stack/M5Cloud/tree/master/firmwares)
+
 #### MacOS/Linux烧录
 - 使用pip安装esptool：
 
