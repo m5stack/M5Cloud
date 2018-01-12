@@ -40,7 +40,7 @@ Windows can use Espressif Flash Download Tools([Download](http://espressif.com/s
 
   ![image](docs/img/add.jpg) 
 
-  Input the Check Code for the M5Stack screen display，Check Code is random,after 60s will refresh.
+  Input the Check Code for the M5Stack screen display，Check Code is random,after 60s will refresh.
 
   ![image](docs/img/img_conncet-suc.JPG)
   
