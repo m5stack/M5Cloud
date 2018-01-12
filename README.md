@@ -97,45 +97,45 @@ The following font constants are defined and can be used as font arguments:
 ## Methods
 
 
-### tft.pixel(x, y [,color])
+### lcd.pixel(x, y [,color])
 
 Draw the pixel at position (x,y).<br>
 If *color* is not given, current foreground color is used.
 
 
-### tft.readPixel(x, y)
+### lcd.readPixel(x, y)
 
 Get the pixel color value at position (x,y).
 
 
-### tft.line(x, y, x1, y1 [,color])
+### lcd.line(x, y, x1, y1 [,color])
 
 Draw the line from point (x,y) to point (x1,y1)<br>
 If *color* is not given, current foreground color is used.
 
 
-### tft.lineByAngle(x, y, start, length, angle [,color])
+### lcd.lineByAngle(x, y, start, length, angle [,color])
 
 Draw the line from point (x,y) with length *lenght* starting st distance *start* from center.<br>
 If *color* is not given, current foreground color is used.<br>
 The angle is given in degrees (0~359).
 
 
-### tft.triangle(x, y, x1, y1, x2, y2 [,color, fillcolor])
+### lcd.triangle(x, y, x1, y1, x2, y2 [,color, fillcolor])
 
 Draw the triangel between points (x,y), (x1,y1) and (x2,y2).<br>
 If *color* is not given, current foreground color is used.<br>
 If *fillcolor* is given, filled triangle will be drawn.
 
 
-### tft.circle(x, y, r [,color, fillcolor])
+### lcd.circle(x, y, r [,color, fillcolor])
 
 Draw the circle with center at (x,y) and radius r.<br>
 If *color* is not given, current foreground color is used.<br>
 If *fillcolor* is given, filled circle will be drawn.
 
 
-### tft.ellipse(x, y, rx, ry [opt, color, fillcolor])
+### lcd.ellipse(x, y, rx, ry [opt, color, fillcolor])
 
 Draw the circle with center at (x,y) and radius r.<br>
 If *color* is not given, current foreground color is used.<br>
@@ -150,14 +150,14 @@ Multiple segments can drawn, combine (logical or) the values.
 If *fillcolor* is given, filled elipse will be drawn.
 
 
-### tft.arc(x, y, r, thick, start, end [color, fillcolor])
+### lcd.arc(x, y, r, thick, start, end [color, fillcolor])
 
 Draw the arc with center at (x,y) and radius *r*, starting at angle *start* and ending at angle *end*<br>
 The thicknes of the arc outline is set by the *thick* argument<br>
 If *fillcolor* is given, filled arc will be drawn.
 
 
-### tft.poly(x, y, r, sides, thick, [color, fillcolor, rotate])
+### lcd.poly(x, y, r, sides, thick, [color, fillcolor, rotate])
 
 Draw the polygon with center at (x,y) and radius *r*, with number of sides *sides*<br>
 The thicknes of the polygon outline is set by the *thick* argument<br>
@@ -165,36 +165,36 @@ If *fillcolor* is given, filled polygon will be drawn.<br>
 If *rotate* is given, the polygon is rotated by the given angle (0~359)
 
 
-### tft.rect(x, y, width, height, [color, fillcolor])
+### lcd.rect(x, y, width, height, [color, fillcolor])
 
 Draw the rectangle from the upper left point at (x,y) and width *width* and height *height*<br>
 If *fillcolor* is given, filled rectangle will be drawn.
 
 
-### tft.roundrect(x, y, width, height, r [color, fillcolor])
+### lcd.roundrect(x, y, width, height, r [color, fillcolor])
 
 Draw the rectangle with rounded corners from the upper left point at **(x,y)** and width **width** and height **height**<br>
 Corner radius is given by **r** argument.<br>
 If **fillcolor** is given, filled rectangle will be drawn.
 
 
-### tft.clear([color])
+### lcd.clear([color])
 
 Clear the screen with default background color or specific color if given.
 
 
-### tft.clearWin([color])
+### lcd.clearWin([color])
 
 Clear the current display window with default background color or specific color if given.
 
 
-### tft.orient(orient)
+### lcd.orient(orient)
 
 Set the display orientation.<br>
-Use one of predifined constants:<br>**tft.PORTRAIT**, **tft.LANDSCAPE**, **tft.PORTRAIT_FLIP**, **tft.LANDSCAPE_FLIP**
+Use one of predifined constants:<br>**lcd.PORTRAIT**, **lcd.LANDSCAPE**, **lcd.PORTRAIT_FLIP**, **lcd.LANDSCAPE_FLIP**
 
 
-### tft.font(font [,rotate, transparent, fixedwidth, dist, width, outline, color])
+### lcd.font(font [,rotate, transparent, fixedwidth, dist, width, outline, color])
 
 Set the active font and its characteristics.
 
@@ -210,7 +210,7 @@ Set the active font and its characteristics.
 | color | font color, if not given the current foreground color is used |
 
 
-### tft.attrib7seg(dist, width, outline, color)
+### lcd.attrib7seg(dist, width, outline, color)
 
 Set characteristics of the 7-segment font
 
@@ -222,12 +222,12 @@ Set characteristics of the 7-segment font
 | color | fill color |
 
 
-### tft.fontSize()
+### lcd.fontSize()
 
 Return width and height of the active font
 
 
-### tft.text(x, y, text [, color])
+### lcd.text(x, y, text [, color])
 
 Display the string *text* at possition (x,y).<br>
 If *color* is not given, current foreground color is used.
@@ -245,60 +245,60 @@ If *color* is not given, current foreground color is used.
   * â€˜\nâ€™ LF (ox0A), continues to the new line, x=0
 
  
-### tft.textWidth(text)
+### lcd.textWidth(text)
 
 Return the width of the string *text* using the active font fontSize
 
 
-### tft.textClear(x, y, text [, color])
+### lcd.textClear(x, y, text [, color])
 
 Clear the the screen area used by string *text* at possition (x,y) using the bacckground color *color*.<br>
 If *color* is not given, current background color is used.
 
 
-### tft.image(x, y, file [,scale, type])
+### lcd.image(x, y, file [,scale, type])
 
 Display the image from the file *file* on position (x,y)
 * **JPG** and **BMP** can be displayed.
-* Constants **tft.CENTER**, **tft.BOTTOM**, **tft.RIGHT** can be used for x&y
+* Constants **lcd.CENTER**, **lcd.BOTTOM**, **lcd.RIGHT** can be used for x&y
 * **x** and **y** values can be negative
 
 **scale** (jpg): image scale factor: 0 to 3; if scale>0, image is scaled by factor 1/(2^scale) (1/2, 1/4 or 1/8)<br>
 **scale** (bmp): image scale factor: 0 to 7; if scale>0, image is scaled by factor 1/(scale+1)<br>
-**type**: optional, set the image type, constants *tft.JPG* or *tft.BMP* can be used. If not set, file extension and/or file content will be used to determine the image type.
+**type**: optional, set the image type, constants *lcd.JPG* or *lcd.BMP* can be used. If not set, file extension and/or file content will be used to determine the image type.
 
 
-### tft.setwin(x, y, x1, y1)
+### lcd.setwin(x, y, x1, y1)
 
 Set active display window to screen rectangle (x,y) - (x1,y1)
 
 
-### tft.resetwin()
+### lcd.resetwin()
 
 Reset active display window to full screen size.
 
 
-### tft.savewin()
+### lcd.savewin()
 
 Save active display window dimensions.
 
 
-### tft.restorewin()
+### lcd.restorewin()
 
 Restore active display window dimensions previously saved wint savewin().
 
 
-### tft.screensize()
+### lcd.screensize()
 
 Return the display size, (width, height)
 
 
-### tft.winsize()
+### lcd.winsize()
 
 Return the active display window size, (width, height)
 
 
-### tft.hsb2rgb(hue, saturation, brightness)
+### lcd.hsb2rgb(hue, saturation, brightness)
 
 Converts the components of a color, as specified by the HSB model, to an equivalent set of values for the default RGB model.<br>
 Returns 24-bit integer value suitable to be used as color argiment
@@ -309,7 +309,7 @@ Arguments
 * **brightness**: float; 0 ~ 1.0
 
 
-### tft.compileFont(file_name [,debug])
+### lcd.compileFont(file_name [,debug])
 
 Compile the source font file (must have **.c** extension) to the binary font file (same name, **.fon** extension) which can be used as external font.<br>
 If *debug=True* the information about compiled font will be printed.
