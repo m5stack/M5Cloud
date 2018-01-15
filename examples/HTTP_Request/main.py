@@ -1,12 +1,5 @@
 from m5stack import *
-import urequests as requests
+import urequests
 
-def getHTMLText(url):
-  try:
-    r = requests.get(url)
-    r.raise_for_status()
-    return r.text
-  except:
-    return 'ERROR'
-
-print(getHTMLText("http://www.baidu.com"))
+r = urequests.get("http://www.baidu.com")
+print(r.text)
