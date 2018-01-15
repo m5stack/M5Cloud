@@ -1,5 +1,5 @@
 from m5stack import *
-import requests
+import urequests as requests
 
 def getHTMLText(url):
   try:
