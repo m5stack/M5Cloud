@@ -442,5 +442,5 @@ uart2.readinto(buf)  # read and store into the given buffer
 uart2.write('abc')   # write the 3 characters
 ```
 
-M5stack firwmre is bose on *MicroPython_ESP32_psRAM_LoBo* More docs:
+M5stack firwmre is base on *MicroPython_ESP32_psRAM_LoBo* More docs:
 https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki
