@@ -227,6 +227,24 @@ Set characteristics of the 7-segment font
 Return width and height of the active font
 
 
+### lcd.print(text[, x, y, color, rotate, transparent, fixedwidth, wrap])
+
+Display the string *text* at possition (x,y).<br>
+If *color* is not given, current foreground color is used.
+
+* **x**: horizontal position of the upper left point in pixels, special values can be given:
+  * CENTER, centers the text
+  * RIGHT, right justifies the text
+  * LASTX, continues from last X position; offset can be used: LASTX+n
+* **y**: vertical position of the upper left point in pixels, special values can be given:
+  * CENTER, centers the text
+  * BOTTOM, bottom justifies the text
+  * LASTY, continues from last Y position; offset can be used: LASTY+n
+* **text**: string to be displayed. Two special characters are allowed in strings:
+  * ‘\r’ CR (0x0D), clears the display to EOL
+  * ‘\n’ LF (ox0A), continues to the new line, x=0
+
+
 ### lcd.text(x, y, text [, color])
 
 Display the string *text* at possition (x,y).<br>
@@ -241,8 +259,8 @@ If *color* is not given, current foreground color is used.
   * BOTTOM, bottom justifies the text
   * LASTY, continues from last Y position; offset can be used: LASTY+n
 * **text**: string to be displayed. Two special characters are allowed in strings:
-  * â€˜\râ€™ CR (0x0D), clears the display to EOL
-  * â€˜\nâ€™ LF (ox0A), continues to the new line, x=0
+  * ‘\r’ CR (0x0D), clears the display to EOL
+  * ‘\n’ LF (ox0A), continues to the new line, x=0
 
  
 ### lcd.textWidth(text)

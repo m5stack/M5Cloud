@@ -1,10 +1,15 @@
 from m5stack import *
-import time, _thread
+import time, _thread, machine
 
 def clock():
+    rtc = machine.RTC()
+    print("Synchronize time from NTP server ...")
+    lcd.println("Synchronize time from NTP server ...")
+    rtc.ntp_sync(server="cn.ntp.org.cn")
+
     lcd.clear()
-    lcd.font(lcd.FONT_7seg, fixedwidth=True, dist=16, width=2)
     lcd.setBrightness(200)
+    lcd.font(lcd.FONT_7seg, fixedwidth=True, dist=16, width=2)
     
     while True:
         d = time.strftime("%Y-%m-%d", time.localtime())

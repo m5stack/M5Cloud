@@ -6,7 +6,7 @@ class DHTBaseI2C:
     def __init__(self, i2c=None, addr=0x5c):
         if i2c == None:
             from machine import I2C
-            self.i2c = I2C()
+            self.i2c = I2C(sda=21, scl=22)
         else:
             self.i2c = i2c
         self.addr = addr

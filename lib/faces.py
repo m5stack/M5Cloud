@@ -5,7 +5,7 @@ M5Stack MicroPython FACES keyboard I2C driver
 class Faces:
   def __init__(self):
     from machine import I2C
-    self.i2c = I2C()
+    self.i2c = I2C(sda=21, scl=22)
     self.addr = 0x08
     self.cb = None
 
