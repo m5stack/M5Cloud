@@ -1,5 +1,6 @@
-import dht12, time
-sensor = dht12.DHT12()
+import time
+from dht12 import DHT12
+sensor = DHT12()
 
 while True:
     sensor.measure()

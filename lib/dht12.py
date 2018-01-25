@@ -5,8 +5,8 @@ MicroPython Aosong DHT12 I2C driver
 class DHTBaseI2C:
     def __init__(self, i2c=None, addr=0x5c):
         if i2c == None:
-            from machine import I2C
-            self.i2c = I2C(sda=21, scl=22)
+            from machine import I2C, Pin
+            self.i2c = I2C(sda=Pin(21), scl=Pin(22))
         else:
             self.i2c = i2c
         self.addr = addr

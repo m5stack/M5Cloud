@@ -76,7 +76,7 @@ def main():
                 prev_price = price
                 
             gc.collect()
-            time.sleep(1)
+            time.sleep(3)
         except:
             pass
 

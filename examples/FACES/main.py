@@ -1,7 +1,7 @@
 from m5stack import *
-import faces
+from faces import Faces
 
-keyboard = faces.Faces()
+keyboard = Faces()
 
 # read once
 print("Key value:", end='')
