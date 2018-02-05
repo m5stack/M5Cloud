@@ -27,20 +27,18 @@ import utils
 import m5cloud
 
 
-def timeout_reset(timer):
-    import machine
-    machine.reset()
-    
+# def timeout_reset(timer):
+#     import machine
+#     machine.reset()
 
-def save_price_csv(filename, timestamp, price):
-    if utils.exists(filename):
-        with open(filename, 'a') as f:
-            f.write(timestamp+','+price+'\n')
-    else:
-        with open(filename, 'w') as f:
-            f.write(timestamp+','+price+'\n')
+# def save_price_csv(filename, timestamp, price):
+#     if utils.exists(filename):
+#         with open(filename, 'a') as f:
+#             f.write(timestamp+','+price+'\n')
+#     else:
+#         with open(filename, 'w') as f:
+#             f.write(timestamp+','+price+'\n')
     
-
 # t1 = machine.Timer(2)
 # t1.init(period=60*1000*60, mode=t1.PERIODIC, callback=timeout_reset)
 
@@ -60,7 +58,6 @@ def main():
             # btc_data = get_btc_price()
             gc.collect()
             lcd.triangle(300,0, 319,0, 319,19, lcd.YELLOW, lcd.YELLOW)
-            # r = urequests.get("https://www.bitstamp.net/api/v2/ticker/btcusd")
             r = urequests.get("http://api.m5stack.com/btc")
             # r = urequests.get("http://api.coindesk.com/v1/bpi/currentprice/usd.json")
             lcd.triangle(300,0, 319,0, 319,19, lcd.BLUE, lcd.BLUE)
@@ -90,7 +87,6 @@ def main():
                     lcd.rect(0, 100, 320, 48, lcd.BLACK, lcd.BLACK)
                     lcd.font('SFArch_48.fon')
                     lcd.print('$ '+price, lcd.CENTER, 100, color=lcd.WHITE)
-                    # lcd.print('$ %.2f'%price, lcd.CENTER, 100, color=lcd.WHITE)
 
                 # Symbol
                 _offset = 175
