@@ -15,7 +15,7 @@
 - 先擦除:
     ``` esptool.py --chip esp32 --port /dev/tty.SLAB_USBtoUART erase_flash ```
 - 烧录bin文件:
-    ``` esptool.py --chip esp32 --port /dev/tty.SLAB_USBtoUART write_flash -z 0x1000 firmware.bin ```
+    ``` esptool.py --chip esp32 --port /dev/tty.SLAB_USBtoUART write_flash --flash_mode dio -z 0x1000 firmware.bin ```
 
 
 #### Windows烧录
