@@ -51,6 +51,8 @@ Windows can use Espressif Flash Download Tools([Download](http://espressif.com/s
 ### 4. Coding
 ![image](docs/img/ide_uploads.jpg)
 
+
+
 # **M5Stack** Micropython
 
 Micropython Getting Started
@@ -459,6 +461,15 @@ uart2.readline()     # read a line
 uart2.readinto(buf)  # read and store into the given buffer
 uart2.write('abc')   # write the 3 characters
 ```
+
+
+
+
+## Boot Modes
+### Safe boot
+After reset, if Button A is held, this will indicate the execution of main.py will be skipped.
+
+---
 
 M5stack firwmre is base on *MicroPython_ESP32_psRAM_LoBo* More docs:
 https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki

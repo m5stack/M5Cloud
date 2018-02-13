@@ -65,6 +65,8 @@ Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http
 ### 4. 开始编程
 ![image](docs/img/ide_uploads.jpg)
 
+
+
 # **M5Stack** Micropython
 
 Micropython 快速入门
@@ -404,7 +406,11 @@ uart2.readinto(buf)  # read and store into the given buffer
 uart2.write('abc')   # write the 3 characters
 ```
 
+## 启动模式
+### 安全模式
+如果你的程序出现问题导致设备出现循环重启等原因无法连接 Web IDE 正常下载程序， 你可以按住 A 按键开机进入安全模式，安全模式下将跳过 *main.py* 文件的运行。
 
+---
 
 更详细文档:
 https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki
