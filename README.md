@@ -229,7 +229,7 @@ Set characteristics of the 7-segment font
 Return width and height of the active font
 
 
-### lcd.print(text[, x, y, color, rotate, transparent, fixedwidth, wrap])
+### lcd.print(text[,x, y, color, rotate, transparent, fixedwidth, wrap])
 
 Display the string *text* at possition (x,y).<br>
 If *color* is not given, current foreground color is used.
@@ -340,27 +340,58 @@ See [README](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/tree/master
 ## **Button**
 
 ---
+### Method
+```python
+buttonA.isPressed()
+buttonA.isReleased()
+buttonA.pressedFor(timeout)
+
+# if set the callback param, it will interrupt callback function
+# or if not set param it will return result at once
+buttonA.wasPressed(callback=None) 
+buttonA.wasReleased(callback=None)
+buttonA.releasedFor(timeout, callback=None)
+```
+
+### Example
+Loop:
+
 ```python
 from m5stack import *
+import utime
 
-while True:    
-  if BtnA.press():
-    lcd.println('button_press A')
-  time.sleep_ms(10)
+while True:
+  if buttonA.wasPressed():
+    print('Button A was Pressed')
 
+  if buttonA.wasReleased():
+    print('Button A was Released')
+
+  if buttonA.pressedFor(1.5):
+    print('Button A pressed for 1.5s')
+
+  if buttonA.releasedFor(2):
+    print('Button A released for 2s press hold.')
+    
+  utime.sleep(0.1)
 ```
 
 Callback：
 
 
 ```python
-from m5stack import *
+def on_wasPressed():
+  print('Button B was Pressed.')
 
-def press_cb(pin):
-    lcd.println('button_press A')
-    print('button_press A')
-    
-BtnA.set_callback(press_cb)
+def on_wasReleased():
+  print('Button B was Released.')
+
+def on_releasedFor():
+  print('Button B released for 1.2s press hold.')
+  
+buttonB.wasPressed(on_wasPressed)
+buttonB.wasReleased(on_wasReleased)
+buttonB.releasedFor(1.2, on_releasedFor)
 ```
 
 ## **SD Card**
@@ -375,15 +406,16 @@ uos.listdir('/sd')
 ```
 
 
-## **Beep**
+## **Speaker**
 
 ---
 
 ```python
 from m5stack import *
 
-beep.tone(freq=1800)
-beep.tone(freq=1800, timeout=200)
+speaker.volume(2)
+speaker.tone(freq=1800)
+speaker.tone(freq=1800, timeout=200) # Non-blocking
 ```
 
 ## **GPIO**
@@ -465,7 +497,7 @@ uart2.write('abc')   # write the 3 characters
 
 
 
-## Boot Modes
+## Boot Modes
 ### Safe boot
 After reset, if Button A is held, this will indicate the execution of main.py will be skipped.
 

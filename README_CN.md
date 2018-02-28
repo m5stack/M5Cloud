@@ -122,7 +122,7 @@ lcd.print('hello world', color=0X00FF00)
 设置默认的绘画颜色和背景色，bcolor一般用于设置文字显示的背景色。
 
 
-### lcd.print(text, [x, y, color])
+### lcd.print(text[,x, y, color, rotate, transparent, fixedwidth, wrap])
 
 显示字符串 *text* 在 *(x, y)* 指定的位置，参数 *color* 为颜色参数。 
 
@@ -284,27 +284,58 @@ Clear the screen with default background color or specific color if given.
 ## **Button**
 
 ---
+### Method
+```python
+buttonA.isPressed()
+buttonA.isReleased()
+buttonA.pressedFor(timeout)
+
+# 带有 callback 参数选项的函数支持设置回调
+# 如果未设置 callback 参数则默认直接返回结果；
+buttonA.wasPressed(callback=None) 
+buttonA.wasReleased(callback=None)
+buttonA.releasedFor(timeout, callback=None)
+```
+
+### Example
+Loop:
+
 ```python
 from m5stack import *
+import utime
 
-while True:    
-  if BtnA.press():
-    lcd.println('button_press A')
-  time.sleep_ms(10)
+while True:
+  if buttonA.wasPressed():
+    print('Button A was Pressed')
 
+  if buttonA.wasReleased():
+    print('Button A was Released')
+
+  if buttonA.pressedFor(1.5):
+    print('Button A pressed for 1.5s')
+
+  if buttonA.releasedFor(2):
+    print('Button A released for 2s press hold.')
+    
+  utime.sleep(0.1)
 ```
 
 Callback：
 
 
 ```python
-from m5stack import *
+def on_wasPressed():
+  print('Button B was Pressed.')
 
-def press_cb(pin):
-    lcd.println('button_press A')
-    print('button_press A')
-    
-BtnA.set_callback(press_cb)
+def on_wasReleased():
+  print('Button B was Released.')
+
+def on_releasedFor():
+  print('Button B released for 1.2s press hold.')
+  
+buttonB.wasPressed(on_wasPressed)
+buttonB.wasReleased(on_wasReleased)
+buttonB.releasedFor(1.2, on_releasedFor)
 ```
 
 ## **SD Card**
@@ -319,15 +350,16 @@ uos.listdir('/sd')
 ```
 
 
-## **Beep**
+## **Speaker**
 
 ---
 
 ```python
 from m5stack import *
 
-beep.tone(freq=1800)
-beep.tone(freq=1800, timeout=200)
+speaker.volume(2) # 设置音量
+speaker.tone(freq=1800)
+speaker.tone(freq=1800, timeout=200) # 非阻塞
 ```
 
 ## **GPIO**
@@ -414,3 +446,4 @@ uart2.write('abc')   # write the 3 characters
 
 更详细文档:
 https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki
+
