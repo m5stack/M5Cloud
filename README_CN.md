@@ -290,8 +290,8 @@ buttonA.isPressed()
 buttonA.isReleased()
 buttonA.pressedFor(timeout)
 
-# 带有 callback 参数选项的函数支持设置回调
-# 如果未设置 callback 参数则默认直接返回结果；
+# 带有 callback 参数选项的函数支持设置回调
+# 如果未设置 callback 参数则默认直接返回结果；
 buttonA.wasPressed(callback=None) 
 buttonA.wasReleased(callback=None)
 buttonA.releasedFor(timeout, callback=None)
@@ -328,7 +328,7 @@ def on_wasPressed():
   print('Button B was Pressed.')
 
 def on_wasReleased():
-  print('Button B was Released.')
+  print('Button B was Released.')
 
 def on_releasedFor():
   print('Button B released for 1.2s press hold.')
@@ -357,7 +357,7 @@ uos.listdir('/sd')
 ```python
 from m5stack import *
 
-speaker.volume(2) # 设置音量
+speaker.volume(2) # 设置音量
 speaker.tone(freq=1800)
 speaker.tone(freq=1800, timeout=200) # 非阻塞
 ```
@@ -438,9 +438,9 @@ uart2.readinto(buf)  # read and store into the given buffer
 uart2.write('abc')   # write the 3 characters
 ```
 
-## 启动模式
-### 安全模式
-如果你的程序出现问题导致设备出现循环重启等原因无法连接 Web IDE 正常下载程序， 你可以按住 A 按键开机进入安全模式，安全模式下将跳过 *main.py* 文件的运行。
+## 启动模式
+### 安全模式
+如果你的程序出现问题导致设备出现循环重启等原因无法连接 Web IDE 正常下载程序， 你可以按住 A 按键开机进入安全模式，安全模式下将跳过 *main.py* 文件的运行。
 
 ---
 
