@@ -384,7 +384,7 @@ def on_wasPressed():
   print('Button B was Pressed.')
 
 def on_wasReleased():
-  print('Button B was Released.')
+  print('Button B was Released.')
 
 def on_releasedFor():
   print('Button B released for 1.2s press hold.')
