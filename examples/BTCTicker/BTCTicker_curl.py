@@ -25,6 +25,7 @@ import ujson
 import curl
 import utils
 import m5cloud
+import gc
 
 
 # def timeout_reset(timer):

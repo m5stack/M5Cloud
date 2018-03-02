@@ -28,20 +28,12 @@ import m5cloud
 import gc
 
 
-# def timeout_reset(timer):
-#     import machine
-#     machine.reset()
+def timeout_reset(timer):
+    import machine
+    machine.reset()
 
-# def save_price_csv(filename, timestamp, price):
-#     if utils.exists(filename):
-#         with open(filename, 'a') as f:
-#             f.write(timestamp+','+price+'\n')
-#     else:
-#         with open(filename, 'w') as f:
-#             f.write(timestamp+','+price+'\n')
-    
-# t1 = machine.Timer(2)
-# t1.init(period=60*1000*60, mode=t1.PERIODIC, callback=timeout_reset)
+t1 = machine.Timer(2)
+t1.init(period=60*1000*60*6, mode=t1.PERIODIC, callback=timeout_reset)
 
 
 def main():
@@ -49,7 +41,7 @@ def main():
     lcd.setBrightness(800)
     lcd.setTextColor(lcd.WHITE, lcd.BLACK)
     lcd.font('SFArch_48.fon')
-    lcd.print('BTC Price', lcd.CENTER, 25, lcd.ORANGE)
+    lcd.print('BTC Price', lcd.CENTER, 30, lcd.ORANGE)
     prev_price = ''
     timereset = time.ticks_ms() + (60*1000)
     while True:
@@ -59,13 +51,20 @@ def main():
             # btc_data = get_btc_price()
             gc.collect()
             lcd.triangle(300,0, 319,0, 319,19, lcd.YELLOW, lcd.YELLOW)
-            r = urequests.get("http://api.m5stack.com/btc")
-            # r = urequests.get("http://api.coindesk.com/v1/bpi/currentprice/usd.json")
+            r = curl.get('http://api.m5stack.com/btc')
             lcd.triangle(300,0, 319,0, 319,19, lcd.BLUE, lcd.BLUE)
-            btc_data = ujson.loads(r.text)
+            btc_data = ujson.loads(r[2])
             print(btc_data)
             print('')
             if btc_data:
+                # update time
+                time_offset = -7
+                t = int(btc_data['timestamp']) + 60*60*time_offset
+                t = time.localtime(t)
+                tstr = 'Update: %4d-%02d-%02d %02d:%02d:%02d' % (t[0], t[1], t[2], t[3], t[4], t[5])
+                lcd.font(lcd.FONT_Default)
+                lcd.print(tstr, 3, 3, 0x666666)
+                
                 # Max price
                 high = btc_data['high']
                 high = high[:(high.find('.')+3)]
@@ -82,15 +81,13 @@ def main():
 
                 # Last Price
                 price = btc_data['last']
-                # price = btc_data['bpi']['USD']['rate_float']
-                # price = '%.2f' % price
                 if not price == prev_price:
-                    lcd.rect(0, 100, 320, 48, lcd.BLACK, lcd.BLACK)
+                    lcd.rect(0, 105, 320, 48, lcd.BLACK, lcd.BLACK)
                     lcd.font('SFArch_48.fon')
-                    lcd.print('$ '+price, lcd.CENTER, 100, color=lcd.WHITE)
+                    lcd.print('$ '+price, lcd.CENTER, 105, color=lcd.WHITE)
 
                 # Symbol
-                _offset = 175
+                _offset = 185
                 if price > prev_price:
                   lcd.rect(140, _offset, 41, 26, lcd.BLACK, lcd.BLACK)
                   lcd.triangle(160,_offset, 140,_offset+25, 180,_offset+25, lcd.GREEN, lcd.GREEN)
@@ -98,10 +95,7 @@ def main():
                   lcd.rect(140, _offset, 41, 26, lcd.BLACK, lcd.BLACK)
                   lcd.triangle(160,_offset+25, 140,_offset, 180,_offset, lcd.RED, lcd.RED)
                 prev_price = price
-                
-                # # updated time
-                # lcd.font(lcd.FONT_Default)
-                # lcd.print('Updated:'+btc_data['time']['updated'], lcd.CENTER, 222, 0x999999)
+
         except:
             pass
         time.sleep(5)

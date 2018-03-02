@@ -1,4 +1,4 @@
-from m5stack import lcd, BtnA
+from m5stack import lcd, buttonA
 from mpu9250 import MPU9250
 from time import sleep_ms
 import gc
@@ -8,7 +8,7 @@ lcd.clear()
 lcd.font(lcd.FONT_Small)
 lcd.setTextColor(lcd.WHITE, lcd.BLACK)
 
-while not BtnA.press():
+while not buttonA.isPressed():
     accel = imu.accel.xyz
     gyro = imu.gyro.xyz
     mag = imu.mag.xyz

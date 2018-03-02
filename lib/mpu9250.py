@@ -87,7 +87,7 @@ class MPU6050(object):
         # else:
         #     raise ValueError("Invalid I2C instance")
         from machine import Pin
-        self._mpu_i2c = I2C(sda=Pin(21), scl=Pin(22),freq=400000)
+        self._mpu_i2c = I2C(sda=21, scl=22,freq=400000)
 
         if device_addr is None:
             devices = set(self._mpu_i2c.scan())
