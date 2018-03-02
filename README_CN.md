@@ -406,7 +406,7 @@ adc.read()
 ```python
 from machine import I2C
 
-i2c = I2C(freq=400000)          # create I2C peripheral at frequency of 400kHz
+i2c = I2C(freq=400000, sda=21, scl=22)          # create I2C peripheral at frequency of 400kHz
                                 # depending on the port, extra parameters may be required
                                 # to select the peripheral and/or pins to use
 
@@ -447,3 +447,15 @@ uart2.write('abc')   # write the 3 characters
 更详细文档:
 https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki
 
+
+## 更新日志
+
+- v0.3.5
+  + 更新至最新 Loboris 的版本
+  + 修复 SDCard SPI 与 屏幕 SPI冲突问题
+  + I2C 模块代码重构，支持 SLAVE mode
+  + machine 支持获取 ESP32 内部温度传感器
+  + 添加 MPU9250 frozen module
+  + 重写按键驱动，支持多种按键事件的回调
+  + 将 beep 改为 speaker，tone 为非阻塞模式
+  + 优化 Web IDE 文件同步协议，使更加稳定

@@ -462,7 +462,8 @@ adc.read()
 ```python
 from machine import I2C
 
-i2c = I2C(freq=400000)          # create I2C peripheral at frequency of 400kHz
+i2c = I2C(freq=400000, sda=21, scl=22)
+                                # create I2C peripheral at frequency of 400kHz
                                 # depending on the port, extra parameters may be required
                                 # to select the peripheral and/or pins to use
 
