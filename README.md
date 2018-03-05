@@ -2,7 +2,7 @@
 
 [EN](README.md) | [中文](README_CN.md)
 
-## Table of Contents
+## Contents
 - [Getting Started](#Getting-Started)
   - [Burn firmware](#1-burn-firmware)
     - [Download firmware](#1download-firmware)
