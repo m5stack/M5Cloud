@@ -2,6 +2,32 @@
 
 [EN](README.md) | [中文](README_CN.md)
 
+## Table of Contents
+- [Getting Started](#Getting-Started)
+  - [Burn firmware](#1-burn-firmware)
+    - [Download firmware](#1download-firmware)
+    - [MacOS/Linux](#macoslinux)
+    - [Windows](#windows)
+  - [Connect the WiFi](#2-configure-the-wifi)
+  - [Binding device](#3-binding-device)
+  - [Coding](#4-coding)
+- [Micropython API](#m5stack-micropython)
+  - [LCD](#lcd)
+  - [Button](#button)
+  - [SD Card](#sd-card)
+  - [Speaker](#speaker)
+  - [GPIO](#gpio)
+  - [PWM](#pwm)
+  - [ADC](#adc)
+  - [DAC](#dac)
+  - [I2C](#i2c)
+  - [SPI](#spi)
+  - [UART](#uart)
+  - [Timer](#timer)
+  - [Neopixel](#neopixel)
+- [LoBo MicroPython WiKi](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki)
+
+
 ## Getting Started
 
 ### 1. Burn firmware
@@ -456,6 +482,17 @@ adc.read()
 ```
 
 
+## **DAC**
+
+---
+```python
+import machine
+
+dac = machine.DAC(machine.Pin(26))
+dac.write(128)
+```
+
+
 ## **I2C**
 
 ---
@@ -478,7 +515,27 @@ i2c.writeto_mem(42, 2, b'\x10') # write 1 byte to memory of slave 42
                                 #   starting at address 2 in the slave
 ```
 
+## **SPI**
 
+---
+```python
+from machine import SPI, Pin
+
+spi = SPI(
+    spihost=SPI.HSPI, 
+    baudrate=2600000
+    sck=Pin(18), 
+    mosi=Pin(23), 
+    miso=Pin(19), 
+    cs=Pin(4)
+)
+
+spi.write(buf) #NOHEAP
+spi.read(nbytes, *, write=0x00) #write is the byte to ?output on MOSI for each byte read in
+spi.readinto(buf, *, write=0x00) #NOHEAP
+spi.write_readinto(write_buf, read_buf) #NOHEAP; write_buf and read_buf can be the same
+
+```
 
 ## **UART**
 
@@ -493,6 +550,67 @@ uart2.read()         # read all available characters
 uart2.readline()     # read a line
 uart2.readinto(buf)  # read and store into the given buffer
 uart2.write('abc')   # write the 3 characters
+```
+
+## **Timer**
+
+---
+tm = machine.Timer(timer_no)
+
+  timer_no argument is the timer number to be used for the timer.
+  It can be 0 - 3 for 4 hardware timers or 4 - 11 for extended timers.
+  If extended timer is selected, timer 0 must already be configured in EXTBASE mode. 
+```python
+import machine
+
+tcounter = 0
+
+p1 = machine.Pin(27)
+p1.init(p1.OUT)
+p1.value(1)
+
+def tcb(timer):
+    global tcounter
+    if tcounter & 1:
+        p1.value(0)
+    else:
+        p1.value(1)
+    tcounter += 1
+    if (tcounter % 10000) == 0:
+        print("[tcb] timer: {} counter: {}".format(timer.timernum(), tcounter))
+
+t1 = machine.Timer(2)
+t1.init(period=20, mode=t1.PERIODIC, callback=tcb)
+```
+
+## **Neopixel**
+
+---
+```python
+import machine, time
+
+np = machine.Neopixel(machine.Pin(22), 24)
+
+def rainbow(loops=120, delay=1, sat=1.0, bri=0.2):
+    for pos in range(0, loops):
+        for i in range(0, 24):
+            dHue = 360.0/24*(pos+i);
+            hue = dHue % 360;
+            np.setHSB(i, hue, sat, bri, 1, False)
+        np.show()
+        if delay > 0:
+            time.sleep_ms(delay)
+
+def blinkRainbow(loops=10, delay=250):
+    for pos in range(0, loops):
+        for i in range(0, 24):
+            dHue = 360.0/24*(pos+i);
+            hue = dHue % 360;
+            np.setHSB(i, hue, 1.0, 0.1, 1, False)
+        np.show()
+        time.sleep_ms(delay)
+        np.clear()
+        time.sleep_ms(delay)
 ```
 
 
