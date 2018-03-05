@@ -26,6 +26,7 @@
   - [Timer](#timer)
   - [Neopixel](#neopixel)
 - [LoBo MicroPython WiKi](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki)
+- [Examples](#examples)
 
 
 ## Getting Started
@@ -90,7 +91,7 @@ Micropython Getting Started
 Import M5Stack:
 
 ```python
-from m5stack import *
+from m5stack import lcd
 lcd.print('hello world!')
 ```
 
