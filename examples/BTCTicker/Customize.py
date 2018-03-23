@@ -38,7 +38,7 @@ t1.init(period=60*1000*60*6, mode=t1.PERIODIC, callback=timeout_reset)
 
 def main():
     lcd.clear()
-    lcd.setBrightness(800)
+    lcd.setBrightness(500)
     lcd.setTextColor(lcd.WHITE, lcd.BLACK)
     lcd.font('SFArch_48.fon')
     lcd.print('BTC Price', lcd.CENTER, 30, lcd.ORANGE)
@@ -58,9 +58,8 @@ def main():
             print('')
             if btc_data:
                 # update time
-                time_offset = -7
-                t = int(btc_data['timestamp']) + 60*60*time_offset
-                t = time.localtime(t)
+                t = int(btc_data['timestamp'])
+                t = time.gmtime(t)
                 tstr = 'Update: %4d-%02d-%02d %02d:%02d:%02d' % (t[0], t[1], t[2], t[3], t[4], t[5])
                 lcd.font(lcd.FONT_Default)
                 lcd.print(tstr, 3, 3, 0x666666)
