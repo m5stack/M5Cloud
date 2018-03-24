@@ -19,7 +19,7 @@
 
 
 #### Windows烧录
-Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http://espressif.com/sites/default/files/tools/flash_download_tools_v3.6.2.2_0.rar))，设置如下(先擦除再烧录)：
+Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](https://www.espressif.com/sites/default/files/tools/flash_download_tools_v3.6.4.rar))，设置如下(先擦除再烧录)：
   ![image](docs/img/windows_esptool.png) 
 
 
