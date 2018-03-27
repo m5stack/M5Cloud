@@ -450,12 +450,28 @@ https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki
 
 ## 更新日志
 
+- v0.3.8
+  + 更新 I2S 模块，支持 IDF 的全功能配置
+  + 针对 I2S 模块对内部 DAC 和 ADC 的优化
+  + 支持 I2S ADC 录音和回放
+  + 在 MicroPython 验证语音识别的可能性
+
+- v0.3.7
+  + 更新至最新 Loboris 的版本
+  + 加入 I2S 模块的支持
+  + 加入 Wave frozen module
+  + 支持 WAV 音频文件的播放
+
+- v0.3.6
+  + 更新至最新 Loboris 的版本
+  + 修复若干 BUG
+
 - v0.3.5
   + 更新至最新 Loboris 的版本
-  + 修复 SDCard SPI 与 屏幕 SPI冲突问题
-  + I2C 模块代码重构，支持 SLAVE mode
-  + machine 支持获取 ESP32 内部温度传感器
+  + 修复 SDCard SPI 与 屏幕 SPI冲突问题
+  + I2C 模块代码重构，支持 SLAVE mode
+  + machine 支持获取 ESP32 内部温度传感器
   + 添加 MPU9250 frozen module
-  + 重写按键驱动，支持多种按键事件的回调
-  + 将 beep 改为 speaker，tone 为非阻塞模式
-  + 优化 Web IDE 文件同步协议，使更加稳定
+  + 重写按键驱动，支持多种按键事件的回调
+  + 将 beep 改为 speaker，tone 为非阻塞模式
+  + 优化 Web IDE 文件同步协议，使更加稳定
