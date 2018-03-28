@@ -4,45 +4,45 @@
 # Copyright (c) 2017 Peter Hinch
 # V0.8 14th May 2017 Option for external switch for cal test. Make platform independent.
 # V0.7 25th June 2015 Adapted for new MPU9x50 interface
-from m5stack import lcd, BtnA, BtnB
+from m5stack import lcd, buttonA, buttonB
 from machine import Pin
 import utime as time
 from mpu9250 import MPU9250
 from fusion import Fusion
-import gc
+from machine import I2C
 
-imu = MPU9250()
+i2c = I2C(sda = 21, scl = 22)
+imu = MPU9250(i2c)
 fuse = Fusion()
 
 
 def getmag():                               # Return (x, y, z) tuple (blocking read)
     return imu.mag.xyz
 
-if BtnA.press():
+if buttonA.isPressed():
     print("Calibrating. Press switch when done.")
     fuse.calibrate(getmag, BtnB.press, lambda : time.sleep(0.1))
     print(fuse.magbias)
 
 if False:
-    mag = imu.mag.xyz # Don't include blocking read in time
-    accel = imu.accel.xyz # or i2c
-    gyro = imu.gyro.xyz
+    mag = imu.magnetic # Don't include blocking read in time
+    accel = imu.acceleration # or i2c
+    gyro = imu.gyro
     start = time.ticks_us()  # Measure computation time only
     fuse.update(accel, gyro, mag) # 1.97mS on Pyboard
     t = time.ticks_diff(time.ticks_us(), start)
     print("Update time (uS):", t)
 
 
-gc.collect()
 lcd.clear()
 lcd.font(lcd.FONT_Small)
 lcd.setTextColor(lcd.WHITE, lcd.BLACK)
 count = 0
 
-while not BtnA.press():
-    accel = imu.accel.xyz
-    gyro = imu.gyro.xyz
-    mag = imu.mag.xyz
+while not buttonA.isPressed():
+    accel = imu.acceleration
+    gyro = imu.gyro
+    mag = imu.magnetic
     fuse.update(accel, gyro, mag) # Note blocking mag read
 
     print("         Heading      Pitch       Roll:")
