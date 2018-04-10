@@ -8,7 +8,7 @@
     - [Download firmware](#1download-firmware)
     - [MacOS/Linux](#macoslinux)
     - [Windows](#windows)
-  - [Connect the WiFi](#2-configure-the-wifi)
+  - [Connect to WiFi](#2-configure-the-wifi)
   - [Binding device](#3-binding-device)
   - [Coding](#4-coding)
 - [Micropython API](#m5stack-micropython)
