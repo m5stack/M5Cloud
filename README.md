@@ -1,6 +1,6 @@
 # M5Stack Web IDE
 
-[EN](README.md) | [中文](README_CN.md)
+[EN](README.md) | [中文](README_CN.md) | [日本語](README_JP.md)
 
 ## Contents
 - [Getting Started](#Getting-Started)
