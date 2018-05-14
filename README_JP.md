@@ -81,7 +81,7 @@ WindowsではEspressif Flash Download Toolsが使えます([ダウンロード](
 
 # **M5Stack** Micropython
 
-Micropythonを使い始める
+MicroPython入門
 
 ## **LCD**
 
@@ -100,22 +100,22 @@ lcd.print('hello world!')
 
 たとえば: **0xFF0000** は赤をあらわします。上位6ビットのみが使用されます。
 
-以下の色名については定義済みでそのまま引数として使用できます:
+以下の色定数が定義済みで、color引数に指定できます:
 
 **BLACK, NAVY, DARKGREEN, DARKCYAN, MAROON, PURPLE, OLIVE, LIGHTGREY, DARKGREY, BLUE, GREEN, CYAN, RED, MAGENTA, YELLOW, WHITE, ORANGE, GREENYELLOW, PINK**
 
 #### 描画
 
-描画に関する座標値はディプレイウインドウに対して相対値です
+描画に関する座標値は表示枠に対する相対値です。
 
-始めにディスプレイウインドウはフルスクリーンとして設定されています。ウインドウを分けるためのメソッドが用意されています。
+初期状態で表示枠は画面全体に設定されています。画面全体の一部を表示枠とするメソッドが用意されています。
 
 #### フォント
 
 9種類のビットマップフォントとひとつの7セグメントフォントが用意されています
-他のフォントファイルも使用できます
+フォントファイルを用意すれば、使えるフォントを増やせます。
 
-以下のフォント定数が定義されており、フォント引数として使用できます:
+以下のフォント定数が定義済みで、font引数に指定できます:
 
 **FONT_Default, FONT_DefaultSmall, FONT_DejaVu18, FONT_Dejavu24, FONT_Ubuntu, FONT_Comic, FONT_Minya, FONT_Tooney, FONT_Small, FONT_7seg**
 
@@ -128,40 +128,35 @@ lcd.print('hello world!')
 ### lcd.pixel(x, y [,color])
 
 (x,y)座標にピクセルを描画します<br>
-*color* 値が与えられない場合デフォルトのフォアグランドカラーが適用されます
-
-
-### lcd.readPixel(x, y)
-
-(x,y)座標のピクセルのカラー値を取得します
+*color* 値が与えられない場合デフォルトの前景色が適用されます。
 
 ### lcd.line(x, y, x1, y1 [,color])
 
-(x,y)座標から(x1,y1)座標まで線を描画します<br>
-*color* 値が与えられない場合デフォルトのフォアグランドカラーが適用されます
+(x,y)座標から(x1,y1)座標まで直線を描画します。<br>
+*color* 値が与えられない場合デフォルトの前景色が適用されます。
 
 ### lcd.lineByAngle(x, y, start, length, angle [,color])
 
-(x,y)座標から*lenght*値の長さの線を中心からの距離*start*値から描画します <br>
-*color* 値が与えられない場合デフォルトのフォアグランドカラーが適用されます<br>
+中心座標(x,y)から*start*だけ離れたところを始点として、長さ*lenght*の直線を描画します。<br>
+*color* 値が与えられない場合デフォルトの前景色が適用されます。<br>
 角度は0-359度の値で表現します
 
 ### lcd.triangle(x, y, x1, y1, x2, y2 [,color, fillcolor])
 
 (x,y), (x1,y1) (x2,y2)の3点をむすぶ三角形を描画します<br>
-*color* 値が与えられない場合デフォルトのフォアグランドカラーが適用されます<br>
-*fillcolor*が与えられた場合、三角形内の色が描画されます
+*color* 値が与えられない場合デフォルトの前景色が適用されます。<br>
+*fillcolor*が与えられた場合、三角形内を指定の色で塗りつぶします。
 
 ### lcd.circle(x, y, r [,color, fillcolor])
 
 (x,y)座標を中心とする半径rの円を描画します<br>
-*color* 値が与えられない場合デフォルトのフォアグランドカラーが適用されます<br>
-*fillcolor*が与えられた場合、三角形内の色が描画されます
+*color* 値が与えられない場合デフォルトの前景色が適用されます。<br>
+*fillcolor*が与えられた場合、円の中を指定の色で塗りつぶします。
 
 ### lcd.ellipse(x, y, rx, ry [opt, color, fillcolor])
 
-(x,y)座標を中心とする半径rの楕円形を描画します<br>
-*color* 値が与えられない場合デフォルトのフォアグランドカラーが適用されます<br>
+座標（x、y）と（rx、ry）を2つの焦点として楕円を描画します。<br>
+*color* 値が与えられない場合デフォルトの前景色が適用されます。<br>
 **opt**は楕円形の弧を定義します、デフォルトidは15です
 
 数値を合わせて複数の弧を定義可能です
@@ -170,39 +165,39 @@ lcd.print('hello world!')
 * 4 - 左下
 * 8 - 右下
 
-*fillcolor*が与えられた場合、楕円形の中の色が描画されます
+*fillcolor*が与えられた場合、楕円の中を指定の色で塗りつぶします。
 
 ### lcd.arc(x, y, r, thick, start, end [color, fillcolor])
 
 (x,y)座標を中心とし*r*を半径とし、*start*で始点角度、*end*で終点角度とする円弧を描画します<br>
 *thick*値により円弧のアウトライン幅を指定します<br>
-*fillcolor*が与えられた場合、円弧の色が描画されます
+*fillcolor*が与えられた場合、円弧の中を指定の色で塗りつぶします。
 
 ### lcd.poly(x, y, r, sides, thick, [color, fillcolor, rotate])
 
 (x,y)座標を中心とし*r*を半径とする多角形を描画します、*sides*で多角形の辺の数を指定します<br>
 *thick*値により多角形のアウトライン幅を指定します<br>
-*fillcolor*が与えられた場合、多角形内の色が描画されます<br>
-*rotate*が与えられた場合、多角形が(0-359)度の角度で回転させます
+*fillcolor*が与えられた場合、多角形の中を指定の色で塗りつぶします。<br>
+*rotate*が与えられた場合、多角形が(0-359)度の角度で回転します。
 
 ### lcd.rect(x, y, width, height, [color, fillcolor])
 
 (x,y)を左上の頂点とし、*width*幅および*height*高さをもつ方形を描画します<br>
-*fillcolor*が与えられた場合、方形内の色が描画されます
+*fillcolor*が与えられた場合、方形の中を指定の色で塗りつぶします。
 
 ### lcd.roundrect(x, y, width, height, r [color, fillcolor])
 
 (x,y)を左上の頂点とし、*width*幅および*height*高さを持ち、四辺の角が丸い方形を描画します<br>
 角の丸みの半径を**r**で指定<br>
-*fillcolor*が与えられた場合、方形内の色が描画されます
+*fillcolor*が与えられた場合、方形の中を指定の色で塗りつぶします。
 
 ### lcd.clear([color])
 
-スクリーンが消去されデフォルトまたは*color*で指定された背景色が表示されます
+デフォルトの背景色または*color*で指定した色で画面を消去します。
 
 ### lcd.clearWin([color])
 
-ウインドウの表示内容が消去されデフォルトまたは*color*で指定された背景色が表示されます
+デフォルトの背景色または*color*で指定した色で表示枠を消去します。
 
 ### lcd.orient(orient)
 
@@ -219,13 +214,12 @@ lcd.print('hello world!')
 | - | - |
 | font | 必須、フォント名定数またはフォントファイル名 |
 | rotate | オプション、フォントの回転角度を指定 (0~360) |
-| transparent | フォントのフォアグランドピクセルのみ描画 |
+| transparent | フォントの前景ピクセルのみ描画 |
 | fixedwidth | 等幅文字でプロポーショナルフォントを描画、指定フォントの最大幅が適用されます |
 | dist | 7セグフォントのみに有効、各バーの間隔を指定 |
 | width | 7セグフォントのみに有効、各バーの幅を指定 |
 | outline | 7セグフォントのみに有効、アウトラインを描画 |
-| color | フォントの色を指定、指定が無い場合は現在のフォアグランドカラーが適用されます |
-
+| color | フォントの色を指定、指定が無い場合は現在の前景色が適用されます |
 
 ### lcd.attrib7seg(dist, width, outline, color)
 
@@ -247,37 +241,37 @@ lcd.print('hello world!')
 ### lcd.print(text[,x, y, color, rotate, transparent, fixedwidth, wrap])
 
 *text*文字列を(x,y)座標に表示します.<br>
-*color*が指定されていない場合は現在のフォアグランドカラーが適用されます
+*color*が指定されていない場合は現在の前景色が適用されます。
 
 * **x**: で文字列の左上ピクセルの水平位置を指定、下記の特殊変数も使用可能:
   * CENTER, 文字列をセンタリング
   * RIGHT, 文字列を右端に揃える
   * LASTX, 最後につかったX座標を使う、LASTX+nでオフセット値適用可
 * **y**: で文字列の左上ピクセルの垂直位置を指定、下記の特殊変数も使用可能:
-  * CENTER, 文字列をセンタリングcenters the text
+  * CENTER, 文字列をセンタリング
   * BOTTOM, 文字列を下端に揃える
   * LASTY, 最後に使ったY座標を使う、LASTY+nでオフセット値適用可
 * **text**: で表示文字列を指定 下記の改行コードを使用可能:
-  * ‘\r’ CR (0x0D), EOLまでディスプレイを消去
-  * ‘\n’ LF (0x0A), ニューラインに続く, x=0
+  * ‘\r’ CR (0x0D), 行末まで表示を消去
+  * ‘\n’ LF (0x0A), 改行を行い, x=0 にします
 
 
 ### lcd.text(x, y, text [, color])
 
 (x,y)座標に文字列*text*を表示します<br>
-*color*が指定されていない場合は現在のフォアグランドカラーが適用されます
+*color*が指定されていない場合は現在の前景色が適用されます。
 
 * **x**: で文字列の左上ピクセルの水平位置を指定、下記の特殊変数も使用可能:
   * CENTER, 文字列をセンタリング
   * RIGHT, 文字列を右端に揃える
   * LASTX, 最後につかったX座標を使う、LASTX+nでオフセット値適用可
 * **y**: で文字列の左上ピクセルの垂直位置を指定、下記の特殊変数も使用可能:
-  * CENTER, 文字列をセンタリングcenters the text
+  * CENTER, 文字列をセンタリング
   * BOTTOM, 文字列を下端に揃える
   * LASTY, 最後に使ったY座標を使う、LASTY+nでオフセット値適用可
 * **text**: で表示文字列を指定 下記の改行コードを使用可能:
-  * ‘\r’ CR (0x0D), EOLまでディスプレイを消去
-  * ‘\n’ LF (ox0A), ニューラインに続く, x=0
+  * ‘\r’ CR (0x0D), 行末まで表示を消去
+  * ‘\n’ LF (0x0A), 改行を行い, x=0 にします
 
 
 ### lcd.textWidth(text)
@@ -286,9 +280,8 @@ lcd.print('hello world!')
 
 ### lcd.textClear(x, y, text [, color])
 
-(x,y)座標で文字列*text*が使用しているスクリーンエリアを消去します、*color*で指定したバックグランドカラーが使われます。<br>
-*color*が指定されていない場合は現在のバックグランドカラーが適用されます
-
+(x,y)座標で文字列*text*が使用する表示領域を消去します。*color*で指定した背景色が使われます。<br>
+*color*が指定されていない場合は現在の背景色が適用されます
 
 ### lcd.image(x, y, file [,scale, type])
 
@@ -297,39 +290,39 @@ lcd.print('hello world!')
 *  **lcd.CENTER**, **lcd.BOTTOM**, **lcd.RIGHT** といった定数をxやyに使用できます
 * **x** や **y** はマイナスの値もとることができます
 
-**scale** (jpg): 画像のスケール値を 0から3の値で指定できます; scale>0の場合、1/(2^scale)倍となります（したがって1/2, 1/4, 1/8）<br>
-**scale** (bmp): 画像のスケール値を0から7の値で指定できます; if scale>の場合、1/(scale+1)倍となります<br>
+**scale** (jpg): 画像のスケール値を0から3の値で指定できます; scale>0の場合、1/(2^scale)倍となります（したがって1/2, 1/4, 1/8）<br>
+**scale** (bmp): 画像のスケール値を0から7の値で指定できます; scale>0の場合、1/(scale+1)倍となります<br>
 **type**: 画像のタイプを指定できます（オプション）*lcd.JPG*または*lcd.BMP*が使えます　特に指定が無い場合はファイルの拡張子やコンテンツを元に判定されます
 
 
 ### lcd.setwin(x, y, x1, y1)
 
-アクティブなディスプレイウインドウを(x,y) - (x1,y1)座標にセットします
+アクティブな表示枠を(x,y) - (x1,y1)座標に設定します。
 
 
 ### lcd.resetwin()
 
-アクティブなディスプレイウインドウをフルスクリーンサイズにリセットします
+アクティブな表示枠を画面全体にリセットします。
 
 
 ### lcd.savewin()
 
-アクティブディスプレイウインドウのサイズを保存します
+アクティブな表示枠設定を保存します。
 
 
 ### lcd.restorewin()
 
-savewin()で保存したアクティブディスプレイウインドウのサイズをリストアします
+savewin()で保存したアクティブな表示枠のサイズをリストアします
 
 
 ### lcd.screensize()
 
-ディスプレイサイズを返します（幅、高さ）
+画面サイズを返します（幅、高さ）
 
 
 ### lcd.winsize()
 
-アクティブディスプレイウインドウサイズを返します（幅、高さ）
+アクティブな表示枠のサイズを返します（幅、高さ）
 
 
 ### lcd.hsb2rgb(hue, saturation, brightness)
@@ -348,7 +341,7 @@ Arguments
 ソースフォントファイル(**.c** 拡張子である必要があります)をコンパイルし、外部フォントとして使用可能なバイナリフォントファイル(**.fon**拡張子)になります<br>
 *debug=True*にするとコンパイルしたフォントに関する情報が表示されます
 
-[ttf2c_vc2003.exe](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/tree/master/MicroPython_BUILD/components/micropython/esp32/modules_examples/tft/font_tool/)を使って、**tft**フォントから**c**ソースファイルを生成できます。
+[ttf2c_vc2003.exe](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/tree/master/MicroPython_BUILD/components/micropython/esp32/modules_examples/tft/font_tool/)を使って、**ttf**フォントから**c**ソースファイルを生成できます。
 
 詳しい手順については[README](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/tree/master/MicroPython_BUILD/components/micropython/esp32/modules_examples/tft/font_tool/README.md)を参照してください
 
@@ -362,7 +355,7 @@ buttonA.isReleased()
 buttonA.pressedFor(timeout)
 
 # callbackパラメータが設定されていればcallback関数割り込みが入ります
-# callbackパラメータが設定されていない場合は一度に結果を返します
+# callbackパラメータが設定されていない場合は直ちに結果を返します
 buttonA.wasPressed(callback=None)
 buttonA.wasReleased(callback=None)
 buttonA.releasedFor(timeout, callback=None)
@@ -391,7 +384,7 @@ while True:
   utime.sleep(0.1)
 ```
 
-Callback：
+コールバック関数割り込みを使う場合:
 
 
 ```python
@@ -612,3 +605,10 @@ def blinkRainbow(loops=10, delay=250):
 
 M5stackファームウェアは*MicroPython_ESP32_psRAM_LoBo*を元にしています。詳しくは以下の文書を参照してください:
 https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki
+
+---
+
+Japanese translation
+  * May, 2018:
+    * [Switch Scinence](https://github.com/SWITCHSCIENCE)
+    * [MinoruInachi](https://github.com/MinoruInachi)
