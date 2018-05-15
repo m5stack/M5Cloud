@@ -1,6 +1,33 @@
 # M5Stack Web IDE
 
 [EN](README.md) | [中文](README_CN.md) | [日本語](README_JP.md)
+
+## 目录
+- [Getting Started](#Getting-Started)
+  - [Burn firmware](#1-burn-firmware)
+    - [Download firmware](#1download-firmware)
+    - [MacOS/Linux](#macoslinux)
+    - [Windows](#windows)
+  - [Connect to WiFi](#2-configure-the-wifi)
+  - [Binding device](#3-binding-device)
+  - [Coding](#4-coding)
+- [Micropython API](#m5stack-micropython)
+  - [LCD](#lcd)
+  - [Button](#button)
+  - [SD Card](#sd-card)
+  - [Speaker](#speaker)
+  - [GPIO](#gpio)
+  - [PWM](#pwm)
+  - [ADC](#adc)
+  - [DAC](#dac)
+  - [I2C](#i2c)
+  - [SPI](#spi)
+  - [UART](#uart)
+  - [Timer](#timer)
+  - [Neopixel](#neopixel)
+- [LoBo MicroPython WiKi](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki)
+- [Examples](examples)
+
 ## 快速开始
 
 ### 1. 烧录固件
@@ -67,7 +94,7 @@ Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http
 
 
 
-# **M5Stack** Micropython
+# Micropython API
 
 Micropython 快速入门
 
@@ -306,16 +333,16 @@ import utime
 
 while True:
   if buttonA.wasPressed():
-    print('Button A was Pressed')
+    lcd.print('Button A was Pressed\n')
 
   if buttonA.wasReleased():
-    print('Button A was Released')
+    lcd.print('Button A was Released\n')
 
   if buttonA.pressedFor(1.5):
-    print('Button A pressed for 1.5s')
+    lcd.print('Button A pressed for 1.5s\n')
 
   if buttonA.releasedFor(2):
-    print('Button A released for 2s press hold.')
+    lcd.print('Button A released for 2s press hold\n')
     
   utime.sleep(0.1)
 ```
@@ -324,14 +351,16 @@ Callback：
 
 
 ```python
+from m5stack import *
+
 def on_wasPressed():
-  print('Button B was Pressed.')
+  lcd.print('Button B was Pressed\n')
 
 def on_wasReleased():
-  print('Button B was Released.')
+  lcd.print('Button B was Released\n')
 
 def on_releasedFor():
-  print('Button B released for 1.2s press hold.')
+  lcd.print('Button B released for 1.2s press hold\n')
   
 buttonB.wasPressed(on_wasPressed)
 buttonB.wasReleased(on_wasReleased)

@@ -79,7 +79,7 @@ WindowsではEspressif Flash Download Toolsが使えます([ダウンロード](
 
 
 
-# **M5Stack** Micropython
+# Micropython API
 
 MicroPython入門
 
@@ -370,17 +370,17 @@ import utime
 
 while True:
   if buttonA.wasPressed():
-    print('Button A was Pressed')
+    lcd.print('Button A was Pressed\n')
 
   if buttonA.wasReleased():
-    print('Button A was Released')
+    lcd.print('Button A was Released\n')
 
   if buttonA.pressedFor(1.5):
-    print('Button A pressed for 1.5s')
+    lcd.print('Button A pressed for 1.5s\n')
 
   if buttonA.releasedFor(2):
-    print('Button A released for 2s press hold.')
-
+    lcd.print('Button A released for 2s press hold\n')
+    
   utime.sleep(0.1)
 ```
 
@@ -388,15 +388,17 @@ while True:
 
 
 ```python
+from m5stack import *
+
 def on_wasPressed():
-  print('Button B was Pressed.')
+  lcd.print('Button B was Pressed\n')
 
 def on_wasReleased():
-  print('Button B was Released.')
+  lcd.print('Button B was Released\n')
 
 def on_releasedFor():
-  print('Button B released for 1.2s press hold.')
-
+  lcd.print('Button B released for 1.2s press hold\n')
+  
 buttonB.wasPressed(on_wasPressed)
 buttonB.wasReleased(on_wasReleased)
 buttonB.releasedFor(1.2, on_releasedFor)

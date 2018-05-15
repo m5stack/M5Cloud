@@ -8,7 +8,7 @@
     - [Download firmware](#1download-firmware)
     - [MacOS/Linux](#macoslinux)
     - [Windows](#windows)
-  - [Connect to WiFi](#2-configure-the-wifi)
+  - [Connect the WiFi](#2-configure-the-wifi)
   - [Binding device](#3-binding-device)
   - [Coding](#4-coding)
 - [Micropython API](#m5stack-micropython)
@@ -80,7 +80,7 @@ Windows can use Espressif Flash Download Tools([Download](https://www.espressif.
 
 
 
-# **M5Stack** Micropython
+# Micropython API
 
 Micropython Getting Started
 
@@ -389,16 +389,16 @@ import utime
 
 while True:
   if buttonA.wasPressed():
-    print('Button A was Pressed')
+    lcd.print('Button A was Pressed\n')
 
   if buttonA.wasReleased():
-    print('Button A was Released')
+    lcd.print('Button A was Released\n')
 
   if buttonA.pressedFor(1.5):
-    print('Button A pressed for 1.5s')
+    lcd.print('Button A pressed for 1.5s\n')
 
   if buttonA.releasedFor(2):
-    print('Button A released for 2s press hold.')
+    lcd.print('Button A released for 2s press hold\n')
     
   utime.sleep(0.1)
 ```
@@ -407,14 +407,16 @@ Callback：
 
 
 ```python
+from m5stack import *
+
 def on_wasPressed():
-  print('Button B was Pressed.')
+  lcd.print('Button B was Pressed\n')
 
 def on_wasReleased():
-  print('Button B was Released.')
+  lcd.print('Button B was Released\n')
 
 def on_releasedFor():
-  print('Button B released for 1.2s press hold.')
+  lcd.print('Button B released for 1.2s press hold\n')
   
 buttonB.wasPressed(on_wasPressed)
 buttonB.wasReleased(on_wasReleased)
@@ -442,7 +444,7 @@ from m5stack import *
 
 speaker.volume(2)
 speaker.tone(freq=1800)
-speaker.tone(freq=1800, timeout=200) # Non-blocking
+speaker.tone(freq=1800, duration=200) # Non-blocking
 ```
 
 ## **GPIO**
