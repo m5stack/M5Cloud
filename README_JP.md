@@ -11,7 +11,7 @@
   - [WiFiに接続](#2-wifi%E3%81%AB%E6%8E%A5%E7%B6%9A)
   - [デバイスを紐付ける](#3-%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%92%E7%B4%90%E4%BB%98%E3%81%91%E3%82%8B)
   - [プログラムを書く](#4-%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%82%92%E6%9B%B8%E3%81%8F)
-- [Micropython API](#m5stack-micropython)
+- [MicroPython API](#micropython-api)
   - [<strong>LCD</strong>](#lcd)
   - [<strong>ボタン</strong>](#%E3%83%9C%E3%82%BF%E3%83%B3)
   - [<strong>SDカード</strong>](#sd%E3%82%AB%E3%83%BC%E3%83%89)
@@ -79,7 +79,7 @@ WindowsではEspressif Flash Download Toolsが使えます([ダウンロード](
 
 
 
-# Micropython API
+# MicroPython API
 
 MicroPython入門
 

@@ -11,7 +11,7 @@
   - [Connect the WiFi](#2-configure-the-wifi)
   - [Binding device](#3-binding-device)
   - [Coding](#4-coding)
-- [Micropython API](#m5stack-micropython)
+- [MicroPython API](#micropython-api)
   - [LCD](#lcd)
   - [Button](#button)
   - [SD Card](#sd-card)
@@ -80,7 +80,7 @@ Windows can use Espressif Flash Download Tools([Download](https://www.espressif.
 
 
 
-# Micropython API
+# MicroPython API
 
 Micropython Getting Started
 
@@ -464,11 +464,22 @@ val = pinin.value()
 ## **PWM**
 
 ---
+`pwm = machine.PWM(pin [, freq=f] [, duty=d] [, timer=tm])`
+`pwm.init([ freq=f] [, duty=d] [, timer=tm])`
+
+| Arg | Description |
+| - | - |
+| pin | esp32 GPIO number to be used as pwm output<br>can be given as integer value or machine.Pin object |
+| freq | **optional**, default 5 kHz; pwm frequeny in Hz (1 - 40000000) |
+| duty | **optional**, default 50% kHz; pwm duty cycle in % (0 - 100) |
+| timer | **optional**, default **0**; pwm timer (0 - 3) |
+
+PWM channel is selected automatically from 8 available pwm channels.
+
 
 ```python
 import machine
-
-pwm = machine.PWM(machine.Pin(3))
+pwm = machine.PWM(26)
 pwm.freq(5000)
 pwm.duty(666)
 ```

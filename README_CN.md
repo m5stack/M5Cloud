@@ -11,7 +11,7 @@
   - [Connect to WiFi](#2-configure-the-wifi)
   - [Binding device](#3-binding-device)
   - [Coding](#4-coding)
-- [Micropython API](#m5stack-micropython)
+- [MicroPython API](#micropython-api)
   - [LCD](#lcd)
   - [Button](#button)
   - [SD Card](#sd-card)
@@ -94,7 +94,7 @@ Windows使用Espressif提供Flash Download Tools工具烧录([点击下载](http
 
 
 
-# Micropython API
+# MicroPython API
 
 Micropython 快速入门
 
