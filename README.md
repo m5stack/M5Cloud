@@ -482,7 +482,7 @@ PWM channel is selected automatically from 8 available pwm channels.
 import machine
 pwm = machine.PWM(26)
 pwm.freq(5000)
-pwm.duty(666)
+pwm.duty(66) # 0.0 ~ 100.0
 ```
 
 

@@ -451,7 +451,7 @@ import machine
 
 pwm = machine.PWM(machine.Pin(3))
 pwm.freq(5000)
-pwm.duty(666)
+pwm.duty(66) # 0.0 ~ 100.0
 ```
 
 
