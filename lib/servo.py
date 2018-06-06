@@ -28,7 +28,7 @@ class Servo:
             self.pwm.duty(0)
             return
         us = min(self.max_us, max(self.min_us, us))
-        duty = us * 1024 * self.freq // 1000000
+        duty = us * 100 * self.freq // 1000000
         self.pwm.duty(duty)
 
     def write_angle(self, degrees=None, radians=None):
