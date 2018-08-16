@@ -1,5 +1,7 @@
 """
 MicroPython Aosong DHT12 I2C driver
+https://github.com/mcauser/micropython-dht12
+MIT License, Copyright (c) 2016 Mike Causer
 """
 
 class DHTBaseI2C:
